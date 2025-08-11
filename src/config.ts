@@ -10,7 +10,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "Fuwari",
+	title: "石墨烯积木的博客",
 	subtitle: "演示站点",
 	lang: "zh_CN", // 语言代码，例如 'en', 'zh_CN', 'ja' 等
 	themeColor: {
@@ -57,21 +57,21 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/demo-avatar.webp", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
-	name: "Lorem Ipsum",
-	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	name: "石墨烯积木",
+	bio: "一个致力于分享科技与设计理念的博客",
 	links: [
-		{
-			name: "Twitter",
-			icon: "fa6-brands:twitter", // 访问 https://icones.js.org/ 获取图标代码
-			// 如果尚未包含相应的图标集，您需要安装它
-			// `pnpm add @iconify-json/<图标集名称>`
-			url: "https://twitter.com",
-		},
-		{
-			name: "Steam",
-			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
-		},
+		// {
+		// 	name: "Twitter",
+		// 	icon: "fa6-brands:twitter", // 访问 https://icones.js.org/ 获取图标代码
+		// 	// 如果尚未包含相应的图标集，您需要安装它
+		// 	// `pnpm add @iconify-json/<图标集名称>`
+		// 	url: "https://twitter.com",
+		// },
+		// {
+		// 	name: "Steam",
+		// 	icon: "fa6-brands:steam",
+		// 	url: "https://store.steampowered.com",
+		// },
 		{
 			name: "GitHub",
 			icon: "fa6-brands:github",
@@ -95,35 +95,17 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const friendLinksConfig: FriendLinksConfig = {
 	enable: true,
 	links: [
+		// {
+		// 	name: "示例友链",
+		// 	url: "https://example.com",
+		// 	description: "这是一个示例友链",
+		// 	avatar: "https://via.placeholder.com/64",
+		// },
 		{
-			name: "示例友链",
-			url: "https://example.com",
-			description: "这是一个示例友链",
-			avatar: "https://via.placeholder.com/64",
-		},
-		{
-			name: "Astro",
-			url: "https://astro.build",
-			description: "现代化的静态站点生成器",
-			avatar: "https://astro.build/favicon.svg",
-		},
-		{
-			name: "GitHub",
-			url: "https://github.com",
-			description: "全球最大的代码托管平台",
-			avatar: "https://github.com/favicon.ico",
-		},
-		{
-			name: "Vue.js",
-			url: "https://vuejs.org",
-			description: "渐进式 JavaScript 框架",
-			avatar: "https://vuejs.org/logo.svg",
-		},
-		{
-			name: "React",
-			url: "https://reactjs.org",
-			description: "用于构建用户界面的 JavaScript 库",
-			avatar: "https://reactjs.org/favicon.ico",
+			name: "Aliom个人博客",
+			url: "https://bailanwa.dpdns.org",
+			description: "Aliom的个人博客",
+			avatar: "https://avatars.githubusercontent.com/u/182760295?v=4",
 		},
 	],
 };
