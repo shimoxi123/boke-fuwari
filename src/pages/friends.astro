@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import { friendLinksConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { friendLinksConfig } from "../config";
 
 // 如果友链功能未启用，重定向到首页
 if (!friendLinksConfig.enable) {
@@ -75,7 +75,7 @@ if (!friendLinksConfig.enable) {
                         <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
                             <div class="flex items-center justify-between text-xs text-black/40 dark:text-white/40">
                                 <span>点击访问</span>
-                                <Icon name="fa6-solid:external-link-alt" class="group-hover:text-[var(--primary)] transition-colors" />
+                                <Icon name="fa6-solid:up-right-from-square" class="group-hover:text-[var(--primary)] transition-colors" />
                             </div>
                         </div>
                     </a>
