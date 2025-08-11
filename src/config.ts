@@ -56,7 +56,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
+	avatar: "assets/images/demo-avatar.webp", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
 	name: "Lorem Ipsum",
 	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	links: [
