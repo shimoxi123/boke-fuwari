@@ -1,7 +1,7 @@
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <toString from mdast-util-to-string>
 import { toString } from "mdast-util-to-string";
 
-/* Use the post's first paragraph as the excerpt */
+/* 使用文章的第一段作为摘要 */
 export function remarkExcerpt() {
 	return (tree, { data }) => {
 		let excerpt = "";

@@ -26,7 +26,7 @@ const className = Astro.props.class;
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
-    <!-- publish date -->
+    <!-- 发布日期 -->
     <div class="flex items-center">
         <div class="meta-icon"
         >
@@ -35,7 +35,7 @@ const className = Astro.props.class;
         <span class="text-50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
     </div>
 
-    <!-- update date -->
+    <!-- 更新日期 -->
     {!hideUpdateDate && updated && updated.getTime() !== published.getTime() && (
         <div class="flex items-center">
             <div class="meta-icon"
@@ -46,7 +46,7 @@ const className = Astro.props.class;
         </div>
     )}
 
-    <!-- categories -->
+    <!-- 分类 -->
     <div class="flex items-center">
         <div class="meta-icon"
         >
@@ -61,7 +61,7 @@ const className = Astro.props.class;
         </div>
     </div>
 
-    <!-- tags -->
+    <!-- 标签 -->
     <div class:list={["items-center", {"flex": !hideTagsForMobile, "hidden md:flex": hideTagsForMobile}]}>
         <div class="meta-icon"
         >

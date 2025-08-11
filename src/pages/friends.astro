@@ -1,0 +1,108 @@
+---
+import { Icon } from "astro-icon/components";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { friendLinksConfig } from "../config";
+
+// 如果友链功能未启用，重定向到首页
+if (!friendLinksConfig.enable) {
+	return Astro.redirect("/");
+}
+---
+
+<MainGridLayout title={i18n(I18nKey.friends)} description="友情链接页面">
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center">
+                    <Icon name="fa6-solid:heart" class="text-white text-lg" />
+                </div>
+                <h1 class="text-3xl font-bold text-[var(--primary)]">{i18n(I18nKey.friends)}</h1>
+            </div>
+            
+            <div class="prose dark:prose-invert max-w-none mb-8">
+                <p class="text-lg text-black/70 dark:text-white/70">
+                    这里是我的朋友们的网站，欢迎大家互相访问交流！
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {friendLinksConfig.links.map((friend) => (
+                    <a href={friend.url} target="_blank" rel="noopener noreferrer" 
+                       class="group block p-6 rounded-xl border border-black/10 dark:border-white/15 
+                              hover:border-[var(--primary)]/30 dark:hover:border-[var(--primary)]/30
+                              hover:shadow-lg hover:shadow-[var(--primary)]/10
+                              transition-all duration-300 hover:-translate-y-1
+                              bg-gradient-to-br from-white/50 to-white/30 
+                              dark:from-white/5 dark:to-white/2
+                              hover:from-[var(--primary)]/5 hover:to-[var(--primary)]/2"
+                       aria-label={`访问 ${friend.name} 的网站`}
+                    >
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden bg-[var(--btn-plain-bg)] ring-2 ring-transparent group-hover:ring-[var(--primary)]/20 transition-all">
+                                {friend.avatar ? (
+                                    <img src={friend.avatar} alt={`${friend.name} 的头像`} 
+                                         class="w-full h-full object-cover" 
+                                         loading="lazy"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                    />
+                                    <div class="w-full h-full flex items-center justify-center text-[var(--primary)] hidden">
+                                        <Icon name="fa6-solid:user" class="text-2xl" />
+                                    </div>
+                                ) : (
+                                    <div class="w-full h-full flex items-center justify-center text-[var(--primary)]">
+                                        <Icon name="fa6-solid:user" class="text-2xl" />
+                                    </div>
+                                )}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <h3 class="font-bold text-lg text-[var(--primary)] group-hover:text-[var(--primary)] transition-colors">
+                                        {friend.name}
+                                    </h3>
+                                    <Icon name="fa6-solid:arrow-up-right-from-square" 
+                                          class="text-sm text-black/30 dark:text-white/30 group-hover:text-[var(--primary)] transition-colors opacity-0 group-hover:opacity-100" />
+                                </div>
+                                {friend.description && (
+                                    <p class="text-sm text-black/60 dark:text-white/60 leading-relaxed">
+                                        {friend.description}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
+                            <div class="flex items-center justify-between text-xs text-black/40 dark:text-white/40">
+                                <span>点击访问</span>
+                                <Icon name="fa6-solid:external-link-alt" class="group-hover:text-[var(--primary)] transition-colors" />
+                            </div>
+                        </div>
+                    </a>
+                ))}
+            </div>
+
+            <!-- 友链申请说明 -->
+            <div class="mt-12 p-6 rounded-xl bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10 border border-[var(--primary)]/20">
+                <div class="flex items-center gap-3 mb-4">
+                    <Icon name="fa6-solid:handshake" class="text-[var(--primary)] text-xl" />
+                    <h2 class="text-xl font-bold text-[var(--primary)]">友链申请</h2>
+                </div>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="text-black/70 dark:text-white/70 mb-4">
+                        欢迎与我交换友链！请确保您的网站符合以下要求：
+                    </p>
+                    <ul class="text-black/60 dark:text-white/60 space-y-2">
+                        <li>网站内容积极向上，无违法违规内容</li>
+                        <li>网站能够正常访问，更新频率适中</li>
+                        <li>网站设计美观，用户体验良好</li>
+                        <li>优先考虑技术、设计、生活等相关主题的博客</li>
+                    </ul>
+                    <p class="text-black/70 dark:text-white/70 mt-4">
+                        如果您希望交换友链，请通过邮件或其他方式联系我，并提供您的网站信息。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</MainGridLayout>

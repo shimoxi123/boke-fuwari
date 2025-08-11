@@ -1,0 +1,90 @@
+---
+import { giscusConfig } from "../config";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// 如果评论系统未启用，则不渲染
+if (!giscusConfig.enable) {
+	return null;
+}
+---
+
+{giscusConfig.enable && (
+	<div class:list={["giscus-container", className]}>
+		<script 
+			src="https://giscus.app/client.js"
+			data-repo={giscusConfig.repo}
+			data-repo-id={giscusConfig.repoId}
+			data-category={giscusConfig.category}
+			data-category-id={giscusConfig.categoryId}
+			data-mapping={giscusConfig.mapping}
+			data-strict={giscusConfig.strict ? "1" : "0"}
+			data-reactions-enabled={giscusConfig.reactionsEnabled ? "1" : "0"}
+			data-emit-metadata={giscusConfig.emitMetadata ? "1" : "0"}
+			data-input-position={giscusConfig.inputPosition}
+			data-theme={giscusConfig.theme}
+			data-lang={giscusConfig.lang}
+			data-loading={giscusConfig.loading}
+			crossorigin="anonymous"
+			async>
+		</script>
+	</div>
+)}
+
+<style>
+	.giscus-container {
+		margin-top: 2rem;
+		padding: 1rem 0;
+	}
+	
+	/* 确保 Giscus 评论框适应主题 */
+	:global(.giscus-frame) {
+		width: 100%;
+	}
+</style>
+
+<script>
+	// 监听主题变化，动态更新 Giscus 主题
+	function updateGiscusTheme() {
+		const iframe = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement;
+		if (iframe) {
+			const isDark = document.documentElement.classList.contains('dark');
+			const theme = isDark ? 'dark' : 'light';
+			
+			iframe.contentWindow?.postMessage(
+				{
+					giscus: {
+						setConfig: {
+							theme: theme
+						}
+					}
+				},
+				'https://giscus.app'
+			);
+		}
+	}
+
+	// 监听主题切换
+	const observer = new MutationObserver((mutations) => {
+		mutations.forEach((mutation) => {
+			if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+				updateGiscusTheme();
+			}
+		});
+	});
+
+	// 开始观察文档元素的类变化
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ['class']
+	});
+
+	// 页面加载完成后更新主题
+	document.addEventListener('DOMContentLoaded', () => {
+		setTimeout(updateGiscusTheme, 1000);
+	});
+</script>

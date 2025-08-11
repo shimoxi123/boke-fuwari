@@ -2,13 +2,14 @@
 import path from "node:path";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
+import Giscus from "@components/Giscus.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
-import { licenseConfig } from "src/config";
+import { licenseConfig, giscusConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
@@ -110,6 +111,21 @@ const jsonLd = {
 
         </div>
     </div>
+
+    <!-- 评论系统 -->
+    {giscusConfig.enable && (
+        <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+            <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-6 h-6 rounded-md bg-[var(--primary)] flex items-center justify-center">
+                        <Icon name="material-symbols:comment-outline-rounded" class="text-white text-sm" />
+                    </div>
+                    <h2 class="text-xl font-bold text-[var(--primary)]">{i18n(I18nKey.comments)}</h2>
+                </div>
+                <Giscus class="onload-animation" />
+            </div>
+        </div>
+    )}
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}

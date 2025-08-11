@@ -1,5 +1,7 @@
 import type {
 	ExpressiveCodeConfig,
+	FriendLinksConfig,
+	GiscusConfig,
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
@@ -9,32 +11,32 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "Fuwari",
-	subtitle: "Demo Site",
-	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
+	subtitle: "演示站点",
+	lang: "zh_CN", // 语言代码，例如 'en', 'zh_CN', 'ja' 等
 	themeColor: {
-		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: false, // Hide the theme color picker for visitors
+		hue: 250, // 主题色的默认色调，范围 0 到 360。例如：红色: 0, 青色: 200, 蓝绿色: 250, 粉色: 345
+		fixed: false, // 为访客隐藏主题色选择器
 	},
 	banner: {
 		enable: false,
-		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		src: "assets/images/demo-banner.png", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
+		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			enable: false, // 显示横幅图片的版权信息
+			text: "", // 要显示的版权文本
+			url: "", // （可选）原作品或艺术家页面的链接
 		},
 	},
 	toc: {
-		enable: true, // Display the table of contents on the right side of the post
-		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
+		enable: true, // 在文章右侧显示目录
+		depth: 2, // 目录中显示的最大标题深度，范围 1 到 3
 	},
 	favicon: [
-		// Leave this array empty to use the default favicon
+		// 保持此数组为空以使用默认图标
 		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
+		//   src: '/favicon/icon.png',    // 图标路径，相对于 /public 目录
+		//   theme: 'light',              // （可选）'light' 或 'dark'，仅在为明暗模式设置不同图标时使用
+		//   sizes: '32x32',              // （可选）图标尺寸，仅在有不同尺寸的图标时设置
 		// }
 	],
 };
@@ -44,24 +46,25 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.About,
+		LinkPreset.Friends,
 		{
 			name: "GitHub",
-			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
+			url: "https://github.com/saicaca/fuwari", // 内部链接不应包含基础路径，因为会自动添加
+			external: true, // 显示外部链接图标并在新标签页中打开
 		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "assets/images/demo-avatar.png", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
 	name: "Lorem Ipsum",
 	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	links: [
 		{
 			name: "Twitter",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
+			icon: "fa6-brands:twitter", // 访问 https://icones.js.org/ 获取图标代码
+			// 如果尚未包含相应的图标集，您需要安装它
+			// `pnpm add @iconify-json/<图标集名称>`
 			url: "https://twitter.com",
 		},
 		{
@@ -84,7 +87,59 @@ export const licenseConfig: LicenseConfig = {
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
-	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
-	// Please select a dark theme, as this blog theme currently only supports dark background color
+	// 注意：某些样式（如背景色）正在被覆盖，请参见 astro.config.mjs 文件。
+	// 请选择深色主题，因为此博客主题目前仅支持深色背景
 	theme: "github-dark",
+};
+
+export const friendLinksConfig: FriendLinksConfig = {
+	enable: true,
+	links: [
+		{
+			name: "示例友链",
+			url: "https://example.com",
+			description: "这是一个示例友链",
+			avatar: "https://via.placeholder.com/64",
+		},
+		{
+			name: "Astro",
+			url: "https://astro.build",
+			description: "现代化的静态站点生成器",
+			avatar: "https://astro.build/favicon.svg",
+		},
+		{
+			name: "GitHub",
+			url: "https://github.com",
+			description: "全球最大的代码托管平台",
+			avatar: "https://github.com/favicon.ico",
+		},
+		{
+			name: "Vue.js",
+			url: "https://vuejs.org",
+			description: "渐进式 JavaScript 框架",
+			avatar: "https://vuejs.org/logo.svg",
+		},
+		{
+			name: "React",
+			url: "https://reactjs.org",
+			description: "用于构建用户界面的 JavaScript 库",
+			avatar: "https://reactjs.org/favicon.ico",
+		},
+	],
+};
+
+export const giscusConfig: GiscusConfig = {
+	enable: true,
+	repo: "shimoxi123/BoKe-PinLun", // 请替换为你的 GitHub 仓库
+	repoId: "R_kgDOPMHo4g", // 请替换为你的仓库 ID
+	category: "General", // Discussion 分类名称
+	categoryId: "DIC_kwDOPMHo4s4Cs675", // 请替换为你的分类 ID
+	mapping: "pathname", // 使用路径名映射
+	strict: false, // 不启用严格匹配
+	reactionsEnabled: true, // 启用反应功能
+	emitMetadata: false, // 不发送元数据
+	inputPosition: "bottom", // 评论框在底部
+	theme: "preferred_color_scheme", // 跟随系统主题
+	lang: "zh-CN", // 中文界面
+	loading: "lazy", // 懒加载
 };

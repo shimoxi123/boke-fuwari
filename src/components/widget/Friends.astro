@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import { friendLinksConfig } from "../../config";
+import WidgetLayout from "./WidgetLayout.astro";
+
+const COLLAPSED_HEIGHT = "12rem";
+const COLLAPSE_THRESHOLD = 4;
+
+const isCollapsed = friendLinksConfig.links.length >= COLLAPSE_THRESHOLD;
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const className = Astro.props.class;
+const style = Astro.props.style;
+---
+
+<WidgetLayout name={i18n(I18nKey.friends)} id="friends" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
+                class={className} style={style}
+>
+    <div class="flex flex-col gap-3">
+        {friendLinksConfig.links.map((friend) => (
+            <a href={friend.url} target="_blank" rel="noopener noreferrer" 
+               class="group flex items-center gap-3 p-3 rounded-lg transition-all duration-200 
+                      hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] active:scale-95"
+               aria-label={`访问 ${friend.name} 的网站`}
+            >
+                <div class="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-[var(--btn-plain-bg)]">
+                    {friend.avatar ? (
+                        <img src={friend.avatar} alt={`${friend.name} 的头像`} 
+                             class="w-full h-full object-cover" 
+                             loading="lazy"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <div class="w-full h-full flex items-center justify-center text-[var(--primary)] hidden">
+                            <Icon name="fa6-solid:user" class="text-lg" />
+                        </div>
+                    ) : (
+                        <div class="w-full h-full flex items-center justify-center text-[var(--primary)]">
+                            <Icon name="fa6-solid:user" class="text-lg" />
+                        </div>
+                    )}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-medium text-[var(--primary)] group-hover:text-[var(--primary)] transition-colors truncate">
+                            {friend.name}
+                        </h3>
+                        <Icon name="fa6-solid:arrow-up-right-from-square" 
+                              class="text-xs text-black/30 dark:text-white/30 group-hover:text-[var(--primary)] transition-colors flex-shrink-0" />
+                    </div>
+                    {friend.description && (
+                        <p class="text-sm text-black/60 dark:text-white/60 mt-1 line-clamp-2">
+                            {friend.description}
+                        </p>
+                    )}
+                </div>
+            </a>
+        ))}
+    </div>
+</WidgetLayout>
