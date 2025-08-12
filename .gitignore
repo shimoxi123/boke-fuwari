@@ -1,37 +1,141 @@
-# build output
+# Build output
 dist/
+build/
+out/
 
-# generated types
+# Generated types and cache
 .astro/
+.next/
+.nuxt/
+.cache/
+.temp/
+.tmp/
 
-# dependencies
+# Dependencies
 node_modules/
+bower_components/
 
-# logs
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+.pnpm-store/
+
+# Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# environment variables
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 .env.production
 
-# macOS-specific files
-.DS_Store
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-.vercel
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
 
-package-lock.json
-bun.lockb
-yarn.lock
+# nyc test coverage
+.nyc_output
 
-# ide
-.idea
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 *.iml
 
-# Local Netlify folder
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Deployment
+.vercel
 .netlify
 
-.vscode
-src\content\posts\1atest.md
+# Test files and temporary content
+src/content/posts/1atest.md
+test-*.md
+*.test.local.*
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Local configuration files
+.local
+local.config.*

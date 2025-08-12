@@ -32,12 +32,10 @@ export const siteConfig: SiteConfig = {
 		depth: 2, // 目录中显示的最大标题深度，范围 1 到 3
 	},
 	favicon: [
-		// 保持此数组为空以使用默认图标
-		// {
-		//   src: '/favicon/icon.png',    // 图标路径，相对于 /public 目录
-		//   theme: 'light',              // （可选）'light' 或 'dark'，仅在为明暗模式设置不同图标时使用
-		//   sizes: '32x32',              // （可选）图标尺寸，仅在有不同尺寸的图标时设置
-		// }
+		{
+			src: '/favicon/icon.png',    // 图标路径，相对于 /public 目录
+			sizes: '32x32',              // 图标尺寸
+		}
 	],
 };
 
