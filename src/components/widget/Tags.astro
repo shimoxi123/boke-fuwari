@@ -9,9 +9,10 @@ import WidgetLayout from "./WidgetLayout.astro";
 
 const tags = await getTagList();
 
-const COLLAPSED_HEIGHT = "7.5rem";
+const COLLAPSED_HEIGHT = "3.5rem"; // 调整为适合一行半标签的高度
+const COLLAPSE_THRESHOLD = 5; // 当标签数量超过5个时折叠
 
-const isCollapsed = tags.length >= 20;
+const isCollapsed = tags.length >= COLLAPSE_THRESHOLD;
 
 interface Props {
 	class?: string;

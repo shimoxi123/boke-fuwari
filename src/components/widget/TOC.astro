@@ -16,7 +16,10 @@ for (const heading of headings) {
 }
 
 const className = Astro.props.class;
-const isPostsRoute = Astro.url.pathname.startsWith(url("/posts/"));
+// 检查是否为文章页面 - 支持新的日期格式URL (/年/月/日/时/) 和旧的posts格式
+const isPostsRoute =
+	Astro.url.pathname.startsWith(url("/posts/")) ||
+	/^\/\d{4}\/\d{2}\/\d{2}\/\d{2}\/$/.test(Astro.url.pathname);
 
 const removeTailingHash = (text: string) => {
 	let lastIndexOfHash = text.lastIndexOf("#");
@@ -208,7 +211,9 @@ class TableOfContents extends HTMLElement {
                 this.init();
             }, { once: true });
         } else {
-            console.debug('Animation element not found');
+            console.debug('Animation element not found, initializing TOC immediately');
+            // 如果没有找到动画元素，直接初始化
+            setTimeout(() => this.init(), 100);
         }
     };
 

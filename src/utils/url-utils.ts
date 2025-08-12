@@ -16,6 +16,15 @@ export function getPostUrlBySlug(slug: string): string {
 	return url(`/posts/${slug}/`);
 }
 
+export function getPostUrlByDate(slug: string, publishedDate: Date): string {
+	const year = publishedDate.getFullYear();
+	const month = (publishedDate.getMonth() + 1).toString().padStart(2, '0');
+	const day = publishedDate.getDate().toString().padStart(2, '0');
+	const hour = publishedDate.getHours().toString().padStart(2, '0');
+
+	return url(`/${year}/${month}/${day}/${hour}/`);
+}
+
 export function getTagUrl(tag: string): string {
 	if (!tag) return url("/archive/");
 	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);

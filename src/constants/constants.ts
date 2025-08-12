@@ -15,3 +15,6 @@ export const MAIN_PANEL_OVERLAPS_BANNER_HEIGHT = 3.5;
 
 // 页面宽度：rem
 export const PAGE_WIDTH = 75;
+
+// 目录宽度：rem
+export const TOC_WIDTH = 15;

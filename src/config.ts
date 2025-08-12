@@ -1,11 +1,11 @@
 import type {
 	ExpressiveCodeConfig,
 	FriendLinksConfig,
-	GiscusConfig,
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	TwikooConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -110,18 +110,8 @@ export const friendLinksConfig: FriendLinksConfig = {
 	],
 };
 
-export const giscusConfig: GiscusConfig = {
+export const twikooConfig: TwikooConfig = {
 	enable: true,
-	repo: "shimoxi123/BoKe-PinLun", // 请替换为你的 GitHub 仓库
-	repoId: "R_kgDOPMHo4g", // 请替换为你的仓库 ID
-	category: "General", // Discussion 分类名称
-	categoryId: "DIC_kwDOPMHo4s4Cs675", // 请替换为你的分类 ID
-	mapping: "pathname", // 使用路径名映射
-	strict: false, // 不启用严格匹配
-	reactionsEnabled: true, // 启用反应功能
-	emitMetadata: false, // 不发送元数据
-	inputPosition: "bottom", // 评论框在底部
-	theme: "preferred_color_scheme", // 跟随系统主题
+	envId: "https://pinlun.shimoxi.qzz.io/.netlify/functions/twikoo", // 你的 Netlify 部署地址
 	lang: "zh-CN", // 中文界面
-	loading: "lazy", // 懒加载
 };

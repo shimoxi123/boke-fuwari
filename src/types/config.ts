@@ -129,3 +129,11 @@ export type GiscusConfig = {
 	lang: string; // 语言
 	loading: "lazy" | "eager"; // 加载方式
 };
+
+export type TwikooConfig = {
+	enable: boolean;
+	envId: string; // 腾讯云环境 ID 或 Vercel/Netlify 部署地址
+	region?: string; // 腾讯云地域，默认为 ap-shanghai
+	path?: string; // 用于区分不同页面的评论，默认为 location.pathname
+	lang?: "zh-CN" | "zh-TW" | "en" | "ja"; // 语言，默认为 zh-CN
+};

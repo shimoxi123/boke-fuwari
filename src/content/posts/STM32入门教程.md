@@ -1,10 +1,10 @@
 ---
-title: "STM32 单片机入门教程" 
+title: "STM32 单片机入门教程"
 published: 2025-07-14 14:00:00
 description: "STM32 单片机入门教程，适合电子类专业学生和电子工程师。"
-tags: ["嵌入式开发", "STM32", "单片机"] 
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/OIP.webp"
-category: "单片机"
+tags: ["STM32", "单片机", "嵌入式开发", "ARM", "Cortex-M", "硬件编程", "电子工程"]
+category: "嵌入式开发"
 draft: false
 ---
 
