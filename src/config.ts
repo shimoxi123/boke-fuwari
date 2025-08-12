@@ -67,14 +67,14 @@ export const profileConfig: ProfileConfig = {
 		// 	// `pnpm add @iconify-json/<图标集名称>`
 		// 	url: "https://twitter.com",
 		// },
-		// {
-		// 	name: "Steam",
-		// 	icon: "fa6-brands:steam",
-		// 	url: "https://store.steampowered.com",
-		// },
+		{
+			name: "资源站",
+			icon: "line-md:cloud-alt-download-filled-loop",
+			url: "https://www.shimoxi.icu",
+		},
 		{
 			name: "GitHub",
-			icon: "fa6-brands:github",
+			icon: "line-md:github-twotone",
 			url: "https://github.com/saicaca/fuwari",
 		},
 	],
