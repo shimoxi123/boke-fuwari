@@ -1,9 +1,9 @@
-# Build output
+# 构建输出
 dist/
 build/
 out/
 
-# Generated types and cache
+# 生成的类型文件和缓存
 .astro/
 .next/
 .nuxt/
@@ -11,18 +11,18 @@ out/
 .temp/
 .tmp/
 
-# Dependencies
+# 依赖文件
 node_modules/
 bower_components/
 
-# Package manager files
+# 包管理器文件
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 bun.lockb
 .pnpm-store/
 
-# Logs
+# 日志文件
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -30,7 +30,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Environment variables
+# 环境变量文件
 .env
 .env.local
 .env.development.local
@@ -38,56 +38,56 @@ lerna-debug.log*
 .env.production.local
 .env.production
 
-# Runtime data
+# 运行时数据
 pids
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
+# 代码覆盖率目录（如 istanbul 工具生成）
 coverage/
 *.lcov
 
-# nyc test coverage
+# nyc 测试覆盖率
 .nyc_output
 
-# Dependency directories
+# 依赖目录
 jspm_packages/
 
-# Optional npm cache directory
+# npm 缓存目录（可选）
 .npm
 
-# Optional eslint cache
+# eslint 缓存（可选）
 .eslintcache
 
-# Optional REPL history
+# REPL 历史记录（可选）
 .node_repl_history
 
-# Output of 'npm pack'
+# 'npm pack' 输出
 *.tgz
 
-# Yarn Integrity file
+# Yarn 完整性文件
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# parcel-bundler 缓存 (https://parceljs.org/)
 .parcel-cache
 
-# Next.js build output
+# Next.js 构建输出
 .next
 
-# Nuxt.js build / generate output
+# Nuxt.js 构建/生成输出
 .nuxt
 dist
 
-# Storybook build outputs
+# Storybook 构建输出
 .out
 .storybook-out
 
-# Temporary folders
+# 临时文件夹
 tmp/
 temp/
 
-# Editor directories and files
+# 编辑器目录和文件
 .vscode/
 .idea/
 *.suo
@@ -97,7 +97,7 @@ temp/
 *.sw?
 *.iml
 
-# OS generated files
+# 操作系统生成的文件
 .DS_Store
 .DS_Store?
 ._*
@@ -107,26 +107,26 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 
-# Deployment
+# 部署相关
 .vercel
 .netlify
 
-# Test files and temporary content
+# 测试文件和临时内容
 src/content/posts/1atest.md
 test-*.md
 *.test.local.*
 
-# Backup files
+# 备份文件
 *.bak
 *.backup
 *~
 
-# Database
+# 数据库文件
 *.db
 *.sqlite
 *.sqlite3
 
-# Archives
+# 压缩文件
 *.7z
 *.dmg
 *.gz
@@ -136,6 +136,6 @@ test-*.md
 *.tar
 *.zip
 
-# Local configuration files
+# 本地配置文件
 .local
 local.config.*

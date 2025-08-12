@@ -73,6 +73,11 @@ const { remarkPluginFrontmatter } = await entry.render();
             <div>
                 {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
             </div>
+            <div>|</div>
+            <div class="flex items-center gap-1">
+                <Icon name="material-symbols:visibility-outline-rounded" class="text-sm"></Icon>
+                <span class="post-views" data-slug={entry.slug}>正在加载...</span>
+            </div>
         </div>
 
     </div>
@@ -108,3 +113,40 @@ const { remarkPluginFrontmatter } = await entry.render();
 
 <style define:vars={{coverWidth}}>
 </style>
+
+<script>
+    // 访问统计功能
+    function updatePostViews() {
+        const viewElements = document.querySelectorAll('.post-views');
+        
+        viewElements.forEach(element => {
+            const slug = element.getAttribute('data-slug');
+            if (!slug) return;
+            
+            const pageKey = `page_views_${slug}`;
+            const views = parseInt(localStorage.getItem(pageKey) || '0');
+            
+            element.textContent = `${views} 次阅读`;
+        });
+    }
+    
+    // 页面加载完成后更新统计
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updatePostViews);
+    } else {
+        updatePostViews();
+    }
+    
+    // 支持 Swup 页面切换
+    const setup = () => {
+        window.swup?.hooks.on('page:view', () => {
+            setTimeout(updatePostViews, 100);
+        });
+    };
+    
+    if (window?.swup?.hooks) {
+        setup();
+    } else {
+        document.addEventListener('swup:enable', setup);
+    }
+</script>

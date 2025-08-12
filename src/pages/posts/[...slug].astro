@@ -117,6 +117,28 @@ const jsonLd = {
 
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
+            <!-- 文章统计信息 -->
+            <div class="mb-6 p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--line-divider)] onload-animation">
+                <div class="flex items-center justify-between text-sm text-black/60 dark:text-white/60">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <Icon name="material-symbols:visibility-outline-rounded" class="text-base"></Icon>
+                            <span>本文阅读量：</span>
+                            <span id="article-views" class="font-medium text-[var(--primary)]">正在加载...</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <Icon name="material-symbols:schedule-outline-rounded" class="text-base"></Icon>
+                            <span>预计阅读时间：</span>
+                            <span class="font-medium text-[var(--primary)]">{remarkPluginFrontmatter.minutes} 分钟</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <Icon name="material-symbols:update-rounded" class="text-sm"></Icon>
+                        <span>最后更新：{entry.data.updated ? entry.data.updated.toLocaleDateString('zh-CN') : entry.data.published.toLocaleDateString('zh-CN')}</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
