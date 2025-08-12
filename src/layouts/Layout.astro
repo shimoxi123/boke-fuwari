@@ -145,6 +145,17 @@ const bannerOffset =
 		}}></style>  <!-- 定义全局 CSS 变量。这将应用于 <html> <body> 和其他一些元素 -->
 
 
+		<!-- 百度统计 -->
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?80a310f47db3e95c8529df4e520d8d6f";
+				var s = document.getElementsByTagName("script")[0]; 
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>

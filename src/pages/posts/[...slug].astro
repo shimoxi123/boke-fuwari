@@ -68,6 +68,14 @@ const jsonLd = {
                         {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
                     </div>
                 </div>
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:visibility-outline-rounded"></Icon>
+                    </div>
+                    <div class="text-sm">
+                        <span id="page-views">正在加载...</span>
+                    </div>
+                </div>
             </div>
 
             <!-- title -->
@@ -150,3 +158,50 @@ const jsonLd = {
     </div>
 
 </MainGridLayout>
+
+<script define:vars={{ slug: entry.slug }}>
+    // 简单的访问统计功能
+    function updatePageViews() {
+        const pageKey = `page_views_${slug}`;
+        const viewsElement = document.getElementById('page-views');
+        
+        if (!viewsElement) return;
+        
+        // 获取当前访问次数
+        let views = parseInt(localStorage.getItem(pageKey) || '0');
+        
+        // 检查是否是同一会话的重复访问
+        const sessionKey = `session_${slug}`;
+        const hasVisited = sessionStorage.getItem(sessionKey);
+        
+        if (!hasVisited) {
+            // 新的访问，增加计数
+            views += 1;
+            localStorage.setItem(pageKey, views.toString());
+            sessionStorage.setItem(sessionKey, 'true');
+        }
+        
+        // 显示访问次数
+        viewsElement.textContent = `${views} 次阅读`;
+    }
+    
+    // 页面加载完成后更新访问统计
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updatePageViews);
+    } else {
+        updatePageViews();
+    }
+    
+    // 支持 Swup 页面切换
+    const setup = () => {
+        window.swup?.hooks.on('page:view', () => {
+            setTimeout(updatePageViews, 100);
+        });
+    };
+    
+    if (window?.swup?.hooks) {
+        setup();
+    } else {
+        document.addEventListener('swup:enable', setup);
+    }
+</script>

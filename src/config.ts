@@ -49,7 +49,7 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Friends,
 		{
 			name: "GitHub",
-			url: "https://github.com/saicaca/fuwari", // 内部链接不应包含基础路径，因为会自动添加
+			url: "https://github.com/shimoxi123", // 内部链接不应包含基础路径，因为会自动添加
 			external: true, // 显示外部链接图标并在新标签页中打开
 		},
 	],
@@ -75,7 +75,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "GitHub",
 			icon: "line-md:github-twotone",
-			url: "https://github.com/saicaca/fuwari",
+			url: "https://github.com/shimoxi123",
 		},
 	],
 };
