@@ -56,7 +56,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/demo-avatar.webp", // 相对于 /src 目录。如果以 '/' 开头则相对于 /public 目录
 	name: "石墨烯积木",
-	bio: "一个致力于分享科技与设计理念的博客",
+	bio: "分享一些有趣的东西",
 	links: [
 		// {
 		// 	name: "Twitter",
