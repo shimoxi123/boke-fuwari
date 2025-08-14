@@ -1,37 +1,30 @@
-## Type of change
+# 友链申请 Pull Request
 
-- [ ] Bug fix (a non-breaking change that fixes an issue)
-- [ ] New feature (a non-breaking change that adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Other (please describe):
+## 📝 申请信息
 
-## Checklist
+请确认您已经阅读并同意友链申请要求，并填写以下信息：
 
-- [ ] I have read the [**CONTRIBUTING**](https://github.com/saicaca/fuwari/blob/main/CONTRIBUTING.md) document.
-- [ ] I have checked to ensure that this Pull Request is not for personal changes.
-- [ ] I have performed a self-review of my own code.
-- [ ] My changes generate no new warnings.
+### 网站基本信息
+- **网站名称**：
+- **网站地址**：
+- **网站描述**：
+- **头像链接**：
 
-## Related Issue
-
-<!-- Please link to the issue that this pull request addresses. e.g. #123 -->
+### 申请说明
+请简要说明申请友链的原因：
 
 
-## Changes
+### 确认清单
+请确认以下事项：
+- [ ] 我的网站内容积极向上，无违法违规内容
+- [ ] 我的网站能够正常访问，更新频率适中
+- [ ] 我的网站设计美观，用户体验良好
+- [ ] 我已经在我的网站添加了您的友链
+- [ ] 我已经按照格式在 `src/config.ts` 中添加了我的网站信息
 
-<!-- Please describe the changes you made in this pull request. -->
+### 修改的文件
+- [ ] `src/config.ts` - 在 `friendLinksConfig.links` 数组中添加了我的网站信息
 
+---
 
-## How To Test
-
-<!-- Please describe how you tested your changes. -->
-
-
-## Screenshots (if applicable)
-
-<!-- If you made any UI changes, please include screenshots. -->
-
-
-## Additional Notes
-
-<!-- Any additional information that you want to share with the reviewer. -->
+感谢您的申请！我会尽快审核并处理您的 Pull Request。

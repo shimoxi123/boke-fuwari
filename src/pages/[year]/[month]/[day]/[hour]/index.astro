@@ -53,8 +53,8 @@ const jsonLd = {
 	keywords: entry.data.tags,
 	author: {
 		"@type": "Person",
-		name: profileConfig.name,
-		url: Astro.site,
+		name: entry.data.author?.name || profileConfig.name,
+		url: entry.data.author?.website || Astro.site,
 	},
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
 	inLanguage: entry.data.lang
@@ -108,6 +108,60 @@ const jsonLd = {
                     {entry.data.title}
                 </div>
             </div>
+
+            <!-- author information -->
+            {entry.data.author && (
+                <div class="onload-animation mb-5">
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10 border border-[var(--primary)]/20">
+                        <div class="flex-shrink-0">
+                            {entry.data.author.avatar ? (
+                                <img 
+                                    src={entry.data.author.avatar} 
+                                    alt={`${entry.data.author.name} 的头像`}
+                                    class="w-12 h-12 rounded-full object-cover ring-2 ring-[var(--primary)]/20"
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <div class="w-12 h-12 rounded-full bg-[var(--primary)]/20 flex items-center justify-center">
+                                    <Icon name="fa6-solid:user" class="text-[var(--primary)] text-lg" />
+                                </div>
+                            )}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-bold text-[var(--primary)] text-lg">{entry.data.author.name}</h3>
+                                <span class="text-xs text-black/40 dark:text-white/40 bg-[var(--primary)]/10 px-2 py-1 rounded-full">作者</span>
+                            </div>
+                            {entry.data.author.bio && (
+                                <p class="text-sm text-black/60 dark:text-white/60 mb-2">{entry.data.author.bio}</p>
+                            )}
+                            <div class="flex items-center gap-3 text-xs">
+                                {entry.data.author.website && (
+                                    <a href={entry.data.author.website} target="_blank" rel="noopener noreferrer" 
+                                       class="flex items-center gap-1 text-[var(--primary)] hover:underline">
+                                        <Icon name="fa6-solid:globe" class="text-xs" />
+                                        <span>网站</span>
+                                    </a>
+                                )}
+                                {entry.data.author.github && (
+                                    <a href={`https://github.com/${entry.data.author.github}`} target="_blank" rel="noopener noreferrer"
+                                       class="flex items-center gap-1 text-[var(--primary)] hover:underline">
+                                        <Icon name="fa6-brands:github" class="text-xs" />
+                                        <span>GitHub</span>
+                                    </a>
+                                )}
+                                {entry.data.author.email && (
+                                    <a href={`mailto:${entry.data.author.email}`}
+                                       class="flex items-center gap-1 text-[var(--primary)] hover:underline">
+                                        <Icon name="fa6-solid:envelope" class="text-xs" />
+                                        <span>邮箱</span>
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <!-- metadata -->
             <div class="onload-animation">

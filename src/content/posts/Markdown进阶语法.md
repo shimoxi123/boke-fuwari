@@ -6,6 +6,13 @@ image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003557353.webp"
 tags: ["Markdown", "进阶语法", "数学公式", "提示框", "博客写作", "高级功能"]
 category: "文档工具"
 draft: false
+author:
+  name: "石墨烯积木"
+  avatar: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp"
+  bio: "分享一些有趣的东西"
+  website: "https://www.shimoxi.qzz.io"
+  github: "shimoxi123"
+  email: "boke@shimoxi.dpdns.org"
 ---
 
 本文介绍了本博客系统支持的 Markdown 进阶语法，包括数学公式、提示框、容器等高级功能。这些功能可以让你的文章更加丰富和专业。

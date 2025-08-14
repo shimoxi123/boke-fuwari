@@ -6,6 +6,13 @@ image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003749110.webp"
 tags: ["VSCode", "代码编辑器", "开发工具", "快捷键", "效率提升", "编程技巧"]
 category: "开发工具"
 draft: false
+author:
+  name: "石墨烯积木"
+  avatar: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp"
+  bio: "分享一些有趣的东西"
+  website: "https://www.shimoxi.qzz.io"
+  github: "shimoxi123"
+  email: "boke@shimoxi.dpdns.org"
 ---
 
 > 作为现代开发者的瑞士军刀，Visual Studio Code已经成为**全球使用率最高**的代码编辑器。但大多数人只使用了其20%的功能。本文将揭示那些能让你开发效率飙升的核心技巧与快捷键，助你成为真正的VSCode大师。

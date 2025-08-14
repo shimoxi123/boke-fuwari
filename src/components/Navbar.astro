@@ -62,23 +62,8 @@ let links: NavBarLink[] = navBarConfig.links.map(
 </div>
 
 <script>
-function switchTheme() {
-    if (localStorage.theme === 'dark') {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-    } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-    }
-}
-
 function loadButtonScript() {
-    let switchBtn = document.getElementById("scheme-switch");
-    if (switchBtn) {
-        switchBtn.onclick = function () {
-            switchTheme()
-        };
-    }
+    // 主题切换按钮由 Svelte 组件处理，不需要额外的脚本
 
     let settingBtn = document.getElementById("display-settings-switch");
     if (settingBtn) {
@@ -101,7 +86,25 @@ function loadButtonScript() {
     }
 }
 
-loadButtonScript();
+// 确保在页面加载完成后执行
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadButtonScript);
+} else {
+    loadButtonScript();
+}
+
+// 支持 Swup 页面切换
+const setup = () => {
+    window.swup?.hooks.on('page:view', () => {
+        setTimeout(loadButtonScript, 100);
+    });
+};
+
+if (window?.swup?.hooks) {
+    setup();
+} else {
+    document.addEventListener('swup:enable', setup);
+}
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>

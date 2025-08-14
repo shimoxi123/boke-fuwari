@@ -6,6 +6,13 @@ image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/OIP.webp"
 tags: ["STM32", "单片机", "嵌入式开发", "ARM", "Cortex-M", "硬件编程", "电子工程"]
 category: "嵌入式开发"
 draft: false
+author:
+  name: "石墨烯积木"
+  avatar: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp"
+  bio: "分享一些有趣的东西"
+  website: "https://www.shimoxi.qzz.io"
+  github: "shimoxi123"
+  email: "boke@shimoxi.dpdns.org"
 ---
 
 

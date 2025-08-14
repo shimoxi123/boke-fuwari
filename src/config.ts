@@ -12,7 +12,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "石墨烯积木的博客",
-	subtitle: "演示站点",
+	subtitle: "主页",
 	lang: "zh_CN", // 语言代码，例如 'en', 'zh_CN', 'ja' 等
 	themeColor: {
 		hue: 250, // 主题色的默认色调，范围 0 到 360。例如：红色: 0, 青色: 200, 蓝绿色: 250, 粉色: 345
@@ -34,9 +34,9 @@ export const siteConfig: SiteConfig = {
 	},
 	favicon: [
 		{
-			src: '/favicon/icon.png',    // 图标路径，相对于 /public 目录
-			sizes: '32x32',              // 图标尺寸
-		}
+			src: "/favicon/icon.png", // 图标路径，相对于 /public 目录
+			sizes: "32x32", // 图标尺寸
+		},
 	],
 };
 

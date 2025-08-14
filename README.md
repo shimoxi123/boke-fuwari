@@ -7,6 +7,17 @@
 
 基于 [Astro](https://astro.build) 和 [Fuwari](https://github.com/saicaca/fuwari) 主题构建的现代化个人博客，集成了百度统计、优化的评论系统和多项性能增强功能。
 
+## 🙏 致谢
+
+本项目基于以下优秀的开源项目：
+
+- **[Fuwari](https://github.com/saicaca/fuwari)** - 原始主题，提供了优雅的设计和完整的博客功能
+- **[Fuwari by afoim](https://github.com/afoim/fuwari)** - 部分灵感和优化思路来源
+- **[Astro](https://astro.build)** - 现代化的静态站点生成器
+- **[Tailwind CSS](https://tailwindcss.com)** - 实用优先的 CSS 框架
+
+感谢所有开源贡献者的无私奉献！🎉
+
 ## 🎯 项目特色
 
 本项目在原版 Fuwari 主题基础上进行了大量优化和功能增强：
@@ -35,6 +46,12 @@
 - ✅ **TypeScript 支持** - 完整的类型定义
 - ✅ **代码格式化** - 使用 Biome 进行代码格式化
 - ✅ **自动化部署** - 支持 Netlify、Vercel 等平台
+
+### 🤝 协作功能
+- ✅ **多作者支持** - 每篇文章可设置独立作者信息
+- ✅ **投稿系统** - 支持通过 GitHub PR 接受外部投稿
+- ✅ **作者展示** - 完整的作者信息展示（头像、简介、社交链接）
+- ✅ **灵活配置** - 可选的作者字段，自动回退到默认作者
 
 ## ✨ Features
 
@@ -184,8 +201,24 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # Set only if the post's language differs from the site's language in `config.ts`
+
+# 作者信息（可选）- 支持多作者协作
+author:
+  name: "作者姓名"                    # 必填
+  avatar: "https://example.com/avatar.jpg"  # 可选，头像链接
+  bio: "作者简介"                     # 可选，简短介绍
+  website: "https://author-site.com"  # 可选，个人网站
+  github: "github-username"           # 可选，GitHub 用户名
+  email: "author@example.com"         # 可选，邮箱地址
 ---
 ```
+
+### 🤝 多作者协作功能
+
+- **自定义作者**：每篇文章可以设置独立的作者信息
+- **投稿友好**：方便其他人通过 GitHub PR 发布文章
+- **完整信息**：支持头像、简介、社交链接等完整作者信息
+- **自动回退**：如果不设置作者，自动使用博客默认作者信息
 
 ## 🧩 Markdown Extended Syntax
 

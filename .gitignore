@@ -139,3 +139,5 @@ test-*.md
 # 本地配置文件
 .local
 local.config.*
+开源前安全检查清单.md
+项目开发总结.md

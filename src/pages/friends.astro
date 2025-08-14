@@ -45,11 +45,7 @@ if (!friendLinksConfig.enable) {
                                     <img src={friend.avatar} alt={`${friend.name} 的头像`} 
                                          class="w-full h-full object-cover" 
                                          loading="lazy"
-                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                                     />
-                                    <div class="w-full h-full flex items-center justify-center text-[var(--primary)] hidden">
-                                        <Icon name="fa6-solid:user" class="text-2xl" />
-                                    </div>
                                 ) : (
                                     <div class="w-full h-full flex items-center justify-center text-[var(--primary)]">
                                         <Icon name="fa6-solid:user" class="text-2xl" />
@@ -61,8 +57,6 @@ if (!friendLinksConfig.enable) {
                                     <h3 class="font-bold text-lg text-[var(--primary)] group-hover:text-[var(--primary)] transition-colors">
                                         {friend.name}
                                     </h3>
-                                    <Icon name="fa6-solid:arrow-up-right-from-square" 
-                                          class="text-sm text-black/30 dark:text-white/30 group-hover:text-[var(--primary)] transition-colors opacity-0 group-hover:opacity-100" />
                                 </div>
                                 {friend.description && (
                                     <p class="text-sm text-black/60 dark:text-white/60 leading-relaxed">
@@ -75,7 +69,6 @@ if (!friendLinksConfig.enable) {
                         <div class="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
                             <div class="flex items-center justify-between text-xs text-black/40 dark:text-white/40">
                                 <span>点击访问</span>
-                                <Icon name="fa6-solid:up-right-from-square" class="group-hover:text-[var(--primary)] transition-colors" />
                             </div>
                         </div>
                     </a>
@@ -99,31 +92,74 @@ if (!friendLinksConfig.enable) {
                         <li>优先考虑技术、设计、生活等相关主题的博客</li>
                     </ul>
                     <p class="text-black/70 dark:text-white/70 mt-4">
-                        如果您希望交换友链，请通过邮件<a href="mailto:boke@shimoxi.dpdns.org">boke@shimoxi.dpdns.org</a>或其他方式联系我，并提供您的网站信息。
+                        如果您希望交换友链，请在 GitHub 仓库提交 Pull Request，在 <code>src/config.ts</code> 文件的 <code>friendLinksConfig.links</code> 数组中添加您的网站信息。
                     </p>
+                    <div class="mt-4 p-4 bg-black/5 dark:bg-white/5 rounded-lg">
+                        <p class="text-sm text-black/60 dark:text-white/60 mb-2">
+                            <Icon name="fa6-brands:github" class="inline mr-2" />
+                            GitHub 仓库：<a href="https://github.com/shimoxi123/boke-fuwari" target="_blank" class="text-[var(--primary)] hover:underline">shimoxi123/boke-fuwari</a>
+                        </p>
+                        <p class="text-sm text-black/60 dark:text-white/60">
+                            📝 提交 PR 时请在描述中说明申请友链的原因，我会尽快审核处理。
+                        </p>
+                    </div>
                 </div>
             </div>
-            <!-- 友链申请格式示例 -->
-            <div class="mt-12 p-6 rounded-xl bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10 border border-[var(--primary)]/20">
+
+            <!-- 文章投稿说明 -->
+            <div class="mt-8 p-6 rounded-xl bg-gradient-to-r from-green-500/5 to-blue-500/5 border border-green-500/20">
                 <div class="flex items-center gap-3 mb-4">
-                    <Icon name="fa6-solid:handshake" class="text-[var(--primary)] text-xl" />
-                    <h2 class="text-xl font-bold text-[var(--primary)]">友链申请格式示例</h2>
+                    <Icon name="fa6-solid:pen-to-square" class="text-green-600 text-xl" />
+                    <h2 class="text-xl font-bold text-green-600">📝 欢迎投稿文章</h2>
                 </div>
                 <div class="prose dark:prose-invert max-w-none">
+                    <p class="text-black/70 dark:text-white/70 mb-4">
+                        除了友链申请，我们也欢迎你通过 GitHub PR 提交优质文章！分享你的知识和经验，让更多人受益。
+                    </p>
                     
-                    <ul class="text-black/60 dark:text-white/60 space-y-2">
-                        <li>网站名称:</br>
-                            &nbsp;&nbsp;石墨烯积木的个人博客
-                        </li>
-                        <li>网站地址:</br> 
-                            &nbsp;&nbsp;https://www.shimoxi.qzz.io</li>
-                        <li>网站描述:</br> 
-                            &nbsp;&nbsp;一个分享前沿科技与设计理念的博客</li>
-                        <li>网站头像URL:</br> 
-                            &nbsp;&nbsp;https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp</li>
-                    </ul>
+                    <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-4 rounded-lg mb-4">
+                        <h3 class="text-lg font-bold text-blue-600 mb-3">
+                            💡 投稿主题建议
+                        </h3>
+                        <ul class="text-sm text-black/70 dark:text-white/70 space-y-1 grid grid-cols-1 md:grid-cols-2 gap-1">
+                            <li>• 技术教程与经验分享</li>
+                            <li>• 开发工具使用技巧</li>
+                            <li>• 项目实战与案例分析</li>
+                            <li>• 编程语言学习心得</li>
+                            <li>• 开源项目介绍</li>
+                            <li>• 行业趋势与思考</li>
+                            <li>• 问题解决方案</li>
+                            <li>• 学习资源推荐</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-lg mb-4">
+                        <h3 class="text-lg font-bold text-yellow-700 dark:text-yellow-300 mb-2">
+                            ✅ 投稿要求
+                        </h3>
+                        <ul class="text-sm text-yellow-800 dark:text-yellow-200 space-y-1">
+                            <li>✅ 内容原创，无抄袭</li>
+                            <li>✅ 文章结构清晰，语言流畅</li>
+                            <li>✅ 技术内容准确，有实用价值</li>
+                            <li>✅ 遵循 Markdown 格式规范</li>
+                            <li>✅ 在 frontmatter 中添加你的作者信息</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6">
+                        <a href="https://github.com/shimoxi123/boke-fuwari" target="_blank" 
+                           class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-bold shadow-lg">
+                            <Icon name="fa6-brands:github" class="text-lg" />
+                            <span>🚀 开始投稿</span>
+                        </a>
+                        <div class="text-sm text-black/70 dark:text-white/70">
+                            <p class="mb-1">📋 投稿流程：Fork 仓库 → 创建文章 → 提交 PR</p>
+                            <p>💡 文章将在 <code class="bg-black/10 dark:bg-white/10 px-2 py-1 rounded text-xs">src/content/posts/</code> 目录下创建</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </MainGridLayout>

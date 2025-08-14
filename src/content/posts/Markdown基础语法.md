@@ -6,6 +6,13 @@ image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003557353.webp"
 tags: ["Markdown", "基础语法", "文档编写", "入门教程", "标记语言"]
 category: "文档工具"
 draft: false
+author:
+  name: "石墨烯积木"
+  avatar: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp"
+  bio: "分享一些有趣的东西"
+  website: "https://www.shimoxi.qzz.io"
+  github: "shimoxi123"
+  email: "boke@shimoxi.dpdns.org"
 ---
 
 Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。本文将详细介绍 Markdown 的基础语法，帮助初学者快速掌握这个强大的文档编写工具。
