@@ -1,4 +1,5 @@
 import type {
+	BaiduAnalyticsConfig,
 	ExpressiveCodeConfig,
 	FriendLinksConfig,
 	LicenseConfig,
@@ -118,4 +119,12 @@ export const twikooConfig: TwikooConfig = {
 	enable: true,
 	envId: "https://pinlun.shimoxi.qzz.io/.netlify/functions/twikoo", // 你的 Netlify 部署地址
 	lang: "zh-CN", // 中文界面
+};
+
+// 百度统计配置
+export const baiduAnalyticsConfig: BaiduAnalyticsConfig = {
+	enable: true,
+	siteId: import.meta.env.BAIDU_ANALYTICS_SITE_ID || "your_site_id_here", // 从环境变量获取站点ID
+	apiKey: import.meta.env.BAIDU_ANALYTICS_API_KEY,
+	secretKey: import.meta.env.BAIDU_ANALYTICS_SECRET_KEY,
 };

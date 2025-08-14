@@ -4,7 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import { profileConfig, siteConfig } from "@/config";
+import { profileConfig, siteConfig, baiduAnalyticsConfig } from "@/config";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -146,15 +146,17 @@ const bannerOffset =
 
 
 		<!-- 百度统计 -->
-		<script>
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?80a310f47db3e95c8529df4e520d8d6f";
-				var s = document.getElementsByTagName("script")[0]; 
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
+		{baiduAnalyticsConfig.enable && baiduAnalyticsConfig.siteId && (
+			<script is:inline define:vars={{siteId: baiduAnalyticsConfig.siteId}}>
+				var _hmt = _hmt || [];
+				(function() {
+					var hm = document.createElement("script");
+					hm.src = "https://hm.baidu.com/hm.js?" + siteId;
+					var s = document.getElementsByTagName("script")[0]; 
+					s.parentNode.insertBefore(hm, s);
+				})();
+			</script>
+		)}
 
 		<slot name="head"></slot>
 

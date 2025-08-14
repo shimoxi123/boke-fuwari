@@ -115,19 +115,60 @@ const { remarkPluginFrontmatter } = await entry.render();
 </style>
 
 <script>
-    // 访问统计功能
-    function updatePostViews() {
+    // 访问统计功能 - 集成百度统计
+    async function updatePostViews() {
         const viewElements = document.querySelectorAll('.post-views');
         
-        viewElements.forEach(element => {
+        for (const element of viewElements) {
             const slug = element.getAttribute('data-slug');
-            if (!slug) return;
+            if (!slug) continue;
             
-            const pageKey = `page_views_${slug}`;
-            const views = parseInt(localStorage.getItem(pageKey) || '0');
-            
-            element.textContent = `${views} 次阅读`;
-        });
+            try {
+                // 构建页面URL
+                const pageUrl = `/posts/${slug}`;
+                
+                // 先显示本地缓存的数据（如果有）
+                const cacheKey = `baidu_views_${slug}`;
+                const cachedViews = localStorage.getItem(cacheKey);
+                if (cachedViews) {
+                    element.textContent = `${cachedViews} 次阅读`;
+                }
+                
+                // 从百度统计API获取真实数据
+                const response = await fetch(`/api/page-views?url=${encodeURIComponent(pageUrl)}`);
+                const data = await response.json();
+                
+                if (data.success && data.views !== undefined) {
+                    const views = data.views;
+                    element.textContent = `${views} 次阅读`;
+                    
+                    // 缓存数据，避免频繁请求
+                    localStorage.setItem(cacheKey, views.toString());
+                    localStorage.setItem(`${cacheKey}_timestamp`, Date.now().toString());
+                } else {
+                    // 如果百度统计API失败，回退到本地统计
+                    const localKey = `page_views_${slug}`;
+                    const localViews = parseInt(localStorage.getItem(localKey) || '0');
+                    element.textContent = `${localViews} 次阅读`;
+                }
+            } catch (error) {
+                console.warn('获取阅读量失败，使用本地统计:', error);
+                // 回退到本地统计
+                const localKey = `page_views_${slug}`;
+                const localViews = parseInt(localStorage.getItem(localKey) || '0');
+                element.textContent = `${localViews} 次阅读`;
+            }
+        }
+    }
+    
+    // 检查缓存是否过期（5分钟）
+    function isCacheExpired(slug) {
+        const timestamp = localStorage.getItem(`baidu_views_${slug}_timestamp`);
+        if (!timestamp) return true;
+        
+        const now = Date.now();
+        const cacheTime = parseInt(timestamp);
+        return (now - cacheTime) > 5 * 60 * 1000; // 5分钟
     }
     
     // 页面加载完成后更新统计

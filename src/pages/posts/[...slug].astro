@@ -182,29 +182,76 @@ const jsonLd = {
 </MainGridLayout>
 
 <script define:vars={{ slug: entry.slug }}>
-    // 简单的访问统计功能
-    function updatePageViews() {
-        const pageKey = `page_views_${slug}`;
+    // 访问统计功能 - 集成百度统计
+    async function updatePageViews() {
         const viewsElement = document.getElementById('page-views');
+        const articleViewsElement = document.getElementById('article-views');
         
-        if (!viewsElement) return;
+        if (!viewsElement && !articleViewsElement) return;
         
-        // 获取当前访问次数
-        let views = parseInt(localStorage.getItem(pageKey) || '0');
-        
-        // 检查是否是同一会话的重复访问
-        const sessionKey = `session_${slug}`;
-        const hasVisited = sessionStorage.getItem(sessionKey);
-        
-        if (!hasVisited) {
-            // 新的访问，增加计数
-            views += 1;
-            localStorage.setItem(pageKey, views.toString());
-            sessionStorage.setItem(sessionKey, 'true');
+        try {
+            // 构建页面URL
+            const pageUrl = `/posts/${slug}`;
+            
+            // 先显示本地缓存的数据（如果有）
+            const cacheKey = `baidu_views_${slug}`;
+            const cachedViews = localStorage.getItem(cacheKey);
+            if (cachedViews) {
+                if (viewsElement) viewsElement.textContent = `${cachedViews} 次阅读`;
+                if (articleViewsElement) articleViewsElement.textContent = cachedViews;
+            }
+            
+            // 从百度统计API获取真实数据
+            const response = await fetch(`/api/page-views?url=${encodeURIComponent(pageUrl)}`);
+            const data = await response.json();
+            
+            if (data.success && data.views !== undefined) {
+                const views = data.views;
+                if (viewsElement) viewsElement.textContent = `${views} 次阅读`;
+                if (articleViewsElement) articleViewsElement.textContent = views.toString();
+                
+                // 缓存数据，避免频繁请求
+                localStorage.setItem(cacheKey, views.toString());
+                localStorage.setItem(`${cacheKey}_timestamp`, Date.now().toString());
+            } else {
+                // 如果百度统计API失败，回退到本地统计
+                const localKey = `page_views_${slug}`;
+                let localViews = parseInt(localStorage.getItem(localKey) || '0');
+                
+                // 检查是否是同一会话的重复访问
+                const sessionKey = `session_${slug}`;
+                const hasVisited = sessionStorage.getItem(sessionKey);
+                
+                if (!hasVisited) {
+                    // 新的访问，增加计数
+                    localViews += 1;
+                    localStorage.setItem(localKey, localViews.toString());
+                    sessionStorage.setItem(sessionKey, 'true');
+                }
+                
+                if (viewsElement) viewsElement.textContent = `${localViews} 次阅读`;
+                if (articleViewsElement) articleViewsElement.textContent = localViews.toString();
+            }
+        } catch (error) {
+            console.warn('获取阅读量失败，使用本地统计:', error);
+            // 回退到本地统计
+            const localKey = `page_views_${slug}`;
+            let localViews = parseInt(localStorage.getItem(localKey) || '0');
+            
+            // 检查是否是同一会话的重复访问
+            const sessionKey = `session_${slug}`;
+            const hasVisited = sessionStorage.getItem(sessionKey);
+            
+            if (!hasVisited) {
+                // 新的访问，增加计数
+                localViews += 1;
+                localStorage.setItem(localKey, localViews.toString());
+                sessionStorage.setItem(sessionKey, 'true');
+            }
+            
+            if (viewsElement) viewsElement.textContent = `${localViews} 次阅读`;
+            if (articleViewsElement) articleViewsElement.textContent = localViews.toString();
         }
-        
-        // 显示访问次数
-        viewsElement.textContent = `${views} 次阅读`;
     }
     
     // 页面加载完成后更新访问统计

@@ -1,0 +1,95 @@
+---
+import { baiduAnalyticsConfig } from '@/config';
+import { getSiteOverview, getLast7DaysRange } from '@/utils/baidu-analytics';
+
+interface Props {
+  showStats?: boolean;
+  className?: string;
+}
+
+const { showStats = false, className = '' } = Astro.props;
+
+let statsData = null;
+let error = null;
+
+// 只在启用统计且需要显示数据时获取
+if (baiduAnalyticsConfig.enable && showStats && baiduAnalyticsConfig.siteId) {
+  try {
+    const { startDate, endDate } = getLast7DaysRange();
+    statsData = await getSiteOverview(baiduAnalyticsConfig.siteId, startDate, endDate);
+  } catch (err) {
+    error = err instanceof Error ? err.message : '获取统计数据失败';
+    console.error('百度统计数据获取失败:', err);
+  }
+}
+---
+
+{showStats && baiduAnalyticsConfig.enable && (
+  <div class={`baidu-analytics ${className}`}>
+    {error ? (
+      <div class="analytics-error">
+        <p class="text-red-500 text-sm">📊 统计数据暂时无法加载</p>
+        <p class="text-gray-500 text-xs">{error}</p>
+      </div>
+    ) : statsData ? (
+      <div class="analytics-stats">
+        <h3 class="text-lg font-semibold mb-3">📊 网站统计</h3>
+        <div class="stats-grid grid grid-cols-1 md:grid-cols-3 gap-4">
+          {statsData.data && statsData.data[0] && (
+            <>
+              <div class="stat-item bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <div class="stat-label text-sm text-gray-600 dark:text-gray-400">页面浏览量</div>
+                <div class="stat-value text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  {statsData.data[0][0]?.toLocaleString() || '0'}
+                </div>
+              </div>
+              <div class="stat-item bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                <div class="stat-label text-sm text-gray-600 dark:text-gray-400">访客数</div>
+                <div class="stat-value text-2xl font-bold text-green-600 dark:text-green-400">
+                  {statsData.data[0][1]?.toLocaleString() || '0'}
+                </div>
+              </div>
+              <div class="stat-item bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                <div class="stat-label text-sm text-gray-600 dark:text-gray-400">IP数</div>
+                <div class="stat-value text-2xl font-bold text-purple-600 dark:text-purple-400">
+                  {statsData.data[0][2]?.toLocaleString() || '0'}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <p class="text-xs text-gray-500 mt-3">数据来源：百度统计（最近7天）</p>
+      </div>
+    ) : (
+      <div class="analytics-loading">
+        <p class="text-gray-500 text-sm">📊 正在加载统计数据...</p>
+      </div>
+    )}
+  </div>
+)}
+
+<style>
+.baidu-analytics {
+  @apply mb-6;
+}
+
+.stats-grid {
+  @apply transition-all duration-300;
+}
+
+.stat-item {
+  @apply transform hover:scale-105 transition-transform duration-200;
+}
+
+.stat-value {
+  @apply font-mono;
+}
+
+.analytics-error {
+  @apply p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800;
+}
+
+.analytics-loading {
+  @apply p-4 bg-gray-50 dark:bg-gray-800 rounded-lg animate-pulse;
+}
+</style>

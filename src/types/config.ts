@@ -123,3 +123,10 @@ export type TwikooConfig = {
 	path?: string; // 用于区分不同页面的评论，默认为 location.pathname
 	lang?: "zh-CN" | "zh-TW" | "en" | "ja"; // 语言，默认为 zh-CN
 };
+
+export type BaiduAnalyticsConfig = {
+	enable: boolean;
+	siteId: string; // 百度统计站点ID
+	apiKey?: string; // 百度统计API Key
+	secretKey?: string; // 百度统计Secret Key
+};
