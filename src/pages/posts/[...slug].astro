@@ -181,7 +181,7 @@ const jsonLd = {
 
 </MainGridLayout>
 
-<script define:vars={{ slug: entry.slug }}>
+<script define:vars={{ slug: entry.slug }} is:inline>
     // 访问统计功能 - 集成百度统计
     async function updatePageViews() {
         const viewsElement = document.getElementById('page-views');

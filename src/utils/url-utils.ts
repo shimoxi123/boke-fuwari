@@ -16,7 +16,7 @@ export function getPostUrlBySlug(slug: string): string {
 	return url(`/posts/${slug}/`);
 }
 
-export function getPostUrlByDate(slug: string, publishedDate: Date): string {
+export function getPostUrlByDate(_slug: string, publishedDate: Date): string {
 	const year = publishedDate.getFullYear();
 	const month = (publishedDate.getMonth() + 1).toString().padStart(2, '0');
 	const day = publishedDate.getDate().toString().padStart(2, '0');

@@ -1,0 +1,15 @@
+# Netlify环境变量配置示例
+# 在Netlify控制台中设置这些环境变量
+
+# Node.js和包管理器版本
+NODE_VERSION=22.17.0
+PNPM_VERSION=9.14.4
+
+# 百度统计配置
+BAIDU_ANALYTICS_API_KEY=your_api_key_here
+BAIDU_ANALYTICS_SECRET_KEY=your_secret_key_here
+BAIDU_ANALYTICS_SITE_ID=your_site_id_here
+
+# 构建优化
+NODE_OPTIONS=--max-old-space-size=4096
+NETLIFY_SKIP_EDGE_HANDLERS_PLUGIN=true

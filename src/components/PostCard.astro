@@ -161,15 +161,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         }
     }
     
-    // 检查缓存是否过期（5分钟）
-    function isCacheExpired(slug) {
-        const timestamp = localStorage.getItem(`baidu_views_${slug}_timestamp`);
-        if (!timestamp) return true;
-        
-        const now = Date.now();
-        const cacheTime = parseInt(timestamp);
-        return (now - cacheTime) > 5 * 60 * 1000; // 5分钟
-    }
+
     
     // 页面加载完成后更新统计
     if (document.readyState === 'loading') {

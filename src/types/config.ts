@@ -94,8 +94,10 @@ export type BlogPostData = {
 	category?: string;
 	prevTitle?: string;
 	prevSlug?: string;
+	prevPublished?: Date;
 	nextTitle?: string;
 	nextSlug?: string;
+	nextPublished?: Date;
 };
 
 export type ExpressiveCodeConfig = {

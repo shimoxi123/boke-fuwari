@@ -15,8 +15,10 @@ const postsCollection = defineCollection({
 		/* For internal use */
 		prevTitle: z.string().default(""),
 		prevSlug: z.string().default(""),
+		prevPublished: z.date().optional(),
 		nextTitle: z.string().default(""),
 		nextSlug: z.string().default(""),
+		nextPublished: z.date().optional(),
 	}),
 });
 const specCollection = defineCollection({
