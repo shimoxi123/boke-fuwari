@@ -119,6 +119,7 @@ export const twikooConfig: TwikooConfig = {
 	enable: true,
 	envId: "https://pinlun.shimoxi.qzz.io/.netlify/functions/twikoo", // 你的 Netlify 部署地址
 	lang: "zh-CN", // 中文界面
+	lazyLoad: false, // 禁用懒加载，自动加载评论系统
 };
 
 // 百度统计配置

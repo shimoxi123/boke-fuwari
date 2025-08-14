@@ -122,6 +122,7 @@ export type TwikooConfig = {
 	region?: string; // 腾讯云地域，默认为 ap-shanghai
 	path?: string; // 用于区分不同页面的评论，默认为 location.pathname
 	lang?: "zh-CN" | "zh-TW" | "en" | "ja"; // 语言，默认为 zh-CN
+	lazyLoad?: boolean; // 是否启用懒加载，默认为 true
 };
 
 export type BaiduAnalyticsConfig = {

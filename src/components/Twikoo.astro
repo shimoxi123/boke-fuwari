@@ -15,243 +15,232 @@ if (!twikooConfig.enable) {
 
 {twikooConfig.enable && (
 	<div class:list={["twikoo-container", className]}>
-		<div id="tcomment">
-			<div style="text-align: center; padding: 2rem; color: var(--content-text-color);">
-				正在加载评论系统...
+		{twikooConfig.lazyLoad ? (
+			<!-- 懒加载模式 -->
+			<>
+				<!-- 懒加载触发按钮 -->
+				<div id="twikoo-trigger" class="twikoo-trigger">
+					<button class="load-comments-btn" onclick="loadTwikoo()">
+						💬 加载评论
+					</button>
+					<p class="load-hint">点击加载评论系统</p>
+				</div>
+				
+				<!-- 评论容器 -->
+				<div id="tcomment" style="display: none;">
+					<div class="loading-placeholder">
+						<div class="loading-spinner"></div>
+						<p>正在加载评论系统...</p>
+					</div>
+				</div>
+			</>
+		) : (
+			<!-- 直接加载模式 -->
+			<div id="tcomment">
+				<div class="loading-placeholder">
+					<div class="loading-spinner"></div>
+					<p>正在加载评论系统...</p>
+				</div>
 			</div>
-		</div>
+		)}
 	</div>
 )}
 
 <style>
 	.twikoo-container {
-		margin-top: 2rem;
-		padding: 1rem 0;
+		margin-top: 1.5rem;
 	}
 	
-	/* Twikoo 样式自定义 */
-	:global(.twikoo) {
-		--tw-bg-color: var(--card-bg);
-		--tw-text-color: var(--content-text-color);
-		--tw-border-color: var(--line-divider);
-		--tw-primary-color: var(--primary);
-		font-family: inherit;
+	/* 简洁的懒加载按钮 */
+	.twikoo-trigger {
+		text-align: center;
+		padding: 1.5rem;
+		border: 1px solid var(--line-divider);
+		border-radius: 8px;
+		transition: border-color 0.2s ease;
 	}
 	
-	/* 适配暗色主题 */
-	:global(.dark .twikoo) {
-		--tw-bg-color: var(--card-bg);
-		--tw-text-color: var(--content-text-color);
-		--tw-border-color: var(--line-divider);
+	.twikoo-trigger:hover {
+		border-color: var(--primary);
 	}
 	
-	/* 自定义 Twikoo 组件样式 */
-	:global(.twikoo .tk-submit) {
-		background-color: var(--primary) !important;
-		border-color: var(--primary) !important;
-		border-radius: 1rem !important;
+	.load-comments-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: transparent;
+		color: var(--primary);
+		border: 1px solid var(--primary);
+		border-radius: 6px;
+		font-size: 0.9rem;
+		cursor: pointer;
 		transition: all 0.2s ease;
 	}
 	
-	:global(.twikoo .tk-submit:hover) {
-		opacity: 0.8;
-		transform: translateY(-1px);
+	.load-comments-btn:hover {
+		background: var(--primary);
+		color: white;
 	}
 	
-	/* 输入框圆润边框 */
-	:global(.twikoo .tk-input),
-	:global(.twikoo .tk-textarea) {
-		background-color: var(--card-bg) !important;
-		border-color: var(--line-divider) !important;
-		color: var(--content-text-color) !important;
-		border-radius: 1rem !important;
+	.load-hint {
+		margin: 0.5rem 0 0 0;
+		font-size: 0.8rem;
+		color: var(--content-text-color);
+		opacity: 0.6;
 	}
 	
-	/* 评论容器圆润边框 */
-	:global(.twikoo .tk-comments-container) {
-		background-color: transparent !important;
+	/* 简洁的加载状态 */
+	.loading-placeholder {
+		text-align: center;
+		padding: 1.5rem;
+		color: var(--content-text-color);
+		opacity: 0.7;
 	}
 	
-	:global(.twikoo .tk-comment) {
-		border-color: var(--line-divider) !important;
-		background-color: var(--card-bg) !important;
-		border-radius: 1.25rem !important;
+	.loading-spinner {
+		width: 20px;
+		height: 20px;
+		border: 2px solid var(--line-divider);
+		border-top: 2px solid var(--primary);
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin: 0 auto 0.5rem;
 	}
 	
-	/* 头像圆润边框 */
-	:global(.twikoo .tk-avatar) {
-		border-radius: 1rem !important;
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 	
-	/* 其他按钮圆润边框 */
-	:global(.twikoo .tk-cancel),
-	:global(.twikoo .tk-reply),
-	:global(.twikoo .tk-action-icon) {
-		border-radius: 0.75rem !important;
-	}
-	
-	/* 表单区域圆润边框 */
-	:global(.twikoo .tk-row) {
-		border-radius: 1rem !important;
-	}
-	
-	/* 元信息输入区域圆润边框 */
-	:global(.twikoo .tk-meta-input) {
-		border-radius: 1rem !important;
+	/* 最简化的 Twikoo 样式 */
+	:global(.twikoo) {
+		font-family: inherit;
 	}
 </style>
 
-<!-- 使用多个CDN源确保加载稳定性 -->
-<script>
-	// 尝试多个CDN源加载Twikoo
-	const cdnSources = [
-		'https://cdn.staticfile.org/twikoo/1.6.44/twikoo.min.js',
-		'https://registry.npmmirror.com/twikoo/1.6.44/files/dist/twikoo.min.js',
-		'https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js'
-	];
-	
-	let currentCdnIndex = 0;
-	
+<!-- 评论系统脚本 -->
+<script define:vars={{ twikooConfig }} is:inline>
+	// 全局变量存储配置
+	window.twikooConfigGlobal = twikooConfig;
+	window.twikooLoaded = false;
+	window.twikooLoading = false;
+
+	// 懒加载函数 - 用户点击时调用
+	window.loadTwikoo = function() {
+		if (window.twikooLoading || window.twikooLoaded) return;
+		loadTwikooScript();
+	};
+
+	// 加载Twikoo脚本
 	function loadTwikooScript() {
-		if (currentCdnIndex >= cdnSources.length) {
-			console.error('所有CDN源都加载失败');
-			handleScriptLoadError();
-			return;
+		window.twikooLoading = true;
+		
+		// 如果是懒加载模式，隐藏触发按钮，显示评论容器
+		if (twikooConfig.lazyLoad) {
+			const trigger = document.getElementById('twikoo-trigger');
+			const container = document.getElementById('tcomment');
+			if (trigger) trigger.style.display = 'none';
+			if (container) container.style.display = 'block';
 		}
 		
+		// 加载Twikoo脚本
 		const script = document.createElement('script');
-		script.src = cdnSources[currentCdnIndex];
+		script.src = 'https://cdn.staticfile.org/twikoo/1.6.44/twikoo.min.js';
 		script.onload = function() {
-			console.log(`Twikoo脚本从CDN ${currentCdnIndex + 1} 加载成功`);
+			console.log('Twikoo脚本加载成功');
+			initTwikoo();
 		};
 		script.onerror = function() {
-			console.warn(`CDN ${currentCdnIndex + 1} 加载失败，尝试下一个`);
-			currentCdnIndex++;
-			loadTwikooScript();
+			console.warn('主CDN加载失败，尝试备用CDN');
+			loadBackupTwikoo();
 		};
 		document.head.appendChild(script);
 	}
-	
-	function handleScriptLoadError() {
-		const container = document.getElementById('tcomment');
-		if (container) {
-			container.innerHTML = `
-				<div style="text-align: center; padding: 2rem; color: var(--content-text-color); border: 1px dashed var(--line-divider); border-radius: 12px; background: var(--card-bg);">
-					<p style="margin-bottom: 0.5rem;">💬 评论系统脚本加载失败</p>
-					<p style="font-size: 0.875rem; opacity: 0.7;">请检查网络连接或稍后重试</p>
-				</div>
-			`;
-		}
-	}
-	
-	// 开始加载脚本
-	loadTwikooScript();
-</script>
 
-<script define:vars={{ twikooConfig }}>
-	// 全局变量存储配置
-	window.twikooConfigGlobal = twikooConfig;
-	
-	// 等待Twikoo脚本加载完成后初始化
-	function waitForTwikooAndInit() {
-		let attempts = 0;
-		const maxAttempts = 20; // 最多等待10秒
-		
-		function checkAndInit() {
-			attempts++;
-			
-			// 检查容器是否存在
-			const container = document.getElementById('tcomment');
-			if (!container) {
-				console.error('Twikoo 容器未找到');
-				return;
-			}
-
-			// 检查 Twikoo 是否加载
-			if (typeof window.twikoo !== 'undefined') {
-				console.log('Twikoo 脚本已加载，开始初始化');
-				initTwikoo();
-			} else if (attempts < maxAttempts) {
-				console.log(`等待Twikoo脚本加载... (${attempts}/${maxAttempts})`);
-				setTimeout(checkAndInit, 500);
-			} else {
-				console.error('Twikoo 脚本加载超时');
-				handleError(new Error('Twikoo 脚本加载超时'));
-			}
-		}
-		
-		checkAndInit();
+	// 备用CDN加载
+	function loadBackupTwikoo() {
+		const script = document.createElement('script');
+		script.src = 'https://unpkg.com/twikoo@1.6.44/dist/twikoo.min.js';
+		script.onload = function() {
+			console.log('Twikoo备用脚本加载成功');
+			initTwikoo();
+		};
+		script.onerror = function() {
+			showError('评论系统加载失败，请检查网络连接');
+		};
+		document.head.appendChild(script);
 	}
 
-	// 初始化 Twikoo
+	// 初始化Twikoo
 	function initTwikoo() {
-		const container = document.getElementById('tcomment');
-		if (!container) {
-			console.error('Twikoo 容器未找到');
+		if (typeof window.twikoo === 'undefined') {
+			showError('Twikoo脚本加载失败');
 			return;
 		}
 
 		try {
-			console.log('开始初始化Twikoo，环境ID:', window.twikooConfigGlobal.envId);
-			
 			window.twikoo.init({
 				envId: window.twikooConfigGlobal.envId,
 				el: '#tcomment',
 				path: location.pathname,
-				lang: 'zh-CN',
-				onCommentLoaded: function () {
-					console.log('Twikoo 评论加载完成');
-				},
-				onError: function (error) {
-					console.error('Twikoo 初始化错误:', error);
-					handleError(error);
-				}
+				lang: window.twikooConfigGlobal.lang || 'zh-CN'
+			}).then(() => {
+				console.log('Twikoo初始化成功');
+				window.twikooLoaded = true;
+				window.twikooLoading = false;
 			}).catch(error => {
-				console.error('Twikoo init promise 错误:', error);
-				handleError(error);
+				console.error('Twikoo初始化失败:', error);
+				showError('评论系统初始化失败');
 			});
 		} catch (error) {
-			console.error('Twikoo 初始化异常:', error);
-			handleError(error);
+			console.error('Twikoo初始化异常:', error);
+			showError('评论系统初始化异常');
 		}
 	}
 
-	function handleError(error) {
-		console.error('Twikoo 错误:', error);
+	// 显示错误信息
+	function showError(message) {
 		const container = document.getElementById('tcomment');
 		if (container) {
 			container.innerHTML = `
 				<div style="text-align: center; padding: 2rem; color: var(--content-text-color); border: 1px dashed var(--line-divider); border-radius: 12px; background: var(--card-bg);">
-					<p style="margin-bottom: 0.5rem;">💬 评论系统暂时无法加载</p>
-					<p style="font-size: 0.875rem; opacity: 0.7;">请检查网络连接或稍后重试</p>
-					<p style="font-size: 0.75rem; opacity: 0.5; margin-top: 1rem;">环境ID: ${window.twikooConfigGlobal.envId}</p>
-					<button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;">重新加载</button>
+					<p style="margin-bottom: 0.5rem;">💬 ${message}</p>
+					<button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">重新加载</button>
 				</div>
 			`;
 		}
+		window.twikooLoading = false;
 	}
 
-	// 页面加载完成后开始等待和初始化
+	// 页面加载完成后的处理
+	function handlePageLoad() {
+		// 如果不是懒加载模式，直接加载评论系统
+		if (!twikooConfig.lazyLoad) {
+			loadTwikooScript();
+		}
+	}
+
+	// 页面加载完成后初始化
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', waitForTwikooAndInit);
+		document.addEventListener('DOMContentLoaded', handlePageLoad);
 	} else {
-		waitForTwikooAndInit();
+		handlePageLoad();
 	}
 
-	// 支持 Swup 页面切换
-	const setup = () => {
+	// 支持页面切换时重置状态
+	const setupSwup = () => {
 		window.swup?.hooks.on('page:view', () => {
-			const container = document.getElementById('tcomment');
-			if (container) {
-				container.innerHTML = '<div style="text-align: center; padding: 1rem; color: var(--content-text-color);">正在加载评论系统...</div>';
-				setTimeout(waitForTwikooAndInit, 300);
-			}
+			window.twikooLoaded = false;
+			window.twikooLoading = false;
+			// 重新处理页面加载
+			setTimeout(handlePageLoad, 100);
 		});
 	};
 
 	if (window?.swup?.hooks) {
-		setup();
+		setupSwup();
 	} else {
-		document.addEventListener('swup:enable', setup);
+		document.addEventListener('swup:enable', setupSwup);
 	}
 </script>
