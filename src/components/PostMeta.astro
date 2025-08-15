@@ -4,6 +4,7 @@ import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { formatDateToYYYYMMDD } from "../utils/date-utils";
 import { getCategoryUrl, getTagUrl } from "../utils/url-utils";
+import type { AuthorConfig } from "../types/config";
 
 interface Props {
 	class: string;
@@ -11,6 +12,7 @@ interface Props {
 	updated?: Date;
 	tags: string[];
 	category: string | null;
+	author?: AuthorConfig;
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
 }
@@ -19,6 +21,7 @@ const {
 	updated,
 	tags,
 	category,
+	author,
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
 } = Astro.props;
@@ -26,6 +29,26 @@ const className = Astro.props.class;
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+    <!-- 作者信息 -->
+    {author && (
+        <div class="flex items-center">
+            <div class="meta-icon">
+                <Icon name="material-icon-theme:authors" class="text-xl"></Icon>
+            </div>
+            <div class="flex items-center gap-2">
+                {author.avatar && (
+                    <img 
+                        src={author.avatar} 
+                        alt={`${author.name} 的头像`}
+                        class="w-4 h-4 rounded-full object-cover"
+                        loading="lazy"
+                    />
+                )}
+                <span class="text-50 text-sm font-medium">{author.name}</span>
+            </div>
+        </div>
+    )}
+
     <!-- 发布日期 -->
     <div class="flex items-center">
         <div class="meta-icon"

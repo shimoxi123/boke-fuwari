@@ -83,6 +83,15 @@ export type LIGHT_DARK_MODE =
 	| typeof DARK_MODE
 	| typeof AUTO_MODE;
 
+export type AuthorConfig = {
+	name: string;
+	avatar?: string;
+	bio?: string;
+	website?: string;
+	github?: string;
+	email?: string;
+};
+
 export type BlogPostData = {
 	body: string;
 	title: string;
@@ -92,6 +101,7 @@ export type BlogPostData = {
 	draft?: boolean;
 	image?: string;
 	category?: string;
+	author?: AuthorConfig;
 	prevTitle?: string;
 	prevSlug?: string;
 	prevPublished?: Date;
