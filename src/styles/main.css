@@ -97,6 +97,8 @@
         @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
         text-[var(--btn-content)] mr-2
     }
+
+
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
         before:font-medium before:first-of-type:hidden before:transition
@@ -138,4 +140,43 @@
 
 .collapsed {
     height: var(--collapsedHeight);
+}
+
+/* Profile transition animations for sidebar optimization
+   profile-hidden: 折叠隐藏Profile卡片
+   profile-visible: 展开显示Profile卡片
+   profile-transition: 平滑过渡动画
+*/
+.profile-hidden {
+    display: none;
+    @apply opacity-0 scale-95 pointer-events-none;
+}
+
+.profile-visible {
+    @apply opacity-100 scale-100 pointer-events-auto;
+}
+
+.profile-transition {
+    @apply transition-all duration-300 ease-in-out;
+    transform-origin: top center;
+}
+
+.more-button {
+    @apply btn-regular rounded-lg px-4 py-2 text-sm font-medium;
+    @apply flex items-center gap-2 w-full justify-center;
+}
+
+.more-button-icon {
+    @apply transition-transform duration-200 ease-in-out;
+}
+
+.more-button-expanded .more-button-icon {
+    @apply rotate-180;
+}
+
+/* Ensure smooth transitions work in both light and dark themes */
+.profile-transition,
+.more-button,
+.more-button-icon {
+    @apply transition-colors;
 }

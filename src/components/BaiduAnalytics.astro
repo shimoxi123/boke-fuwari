@@ -15,6 +15,13 @@ let error = null;
 // 只在启用统计且需要显示数据时获取
 if (baiduAnalyticsConfig.enable && showStats && baiduAnalyticsConfig.siteId) {
   try {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      await new Promise(resolve => {
+        window.requestIdleCallback(resolve);
+      });
+    } else {
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
     const { startDate, endDate } = getLast7DaysRange();
     statsData = await getSiteOverview(baiduAnalyticsConfig.siteId, startDate, endDate);
   } catch (err) {

@@ -141,3 +141,6 @@ test-*.md
 local.config.*
 开源前安全检查清单.md
 项目开发总结.md
+.kiro/specs/article-sidebar-optimization/design.md
+.kiro/specs/article-sidebar-optimization/requirements.md
+.kiro/specs/article-sidebar-optimization/tasks.md

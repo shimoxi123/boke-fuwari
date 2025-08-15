@@ -1,0 +1,93 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["more-button-container", className]}>
+  <button 
+    id="more-button"
+    class="more-button btn-regular rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 w-full justify-center active:scale-95"
+    aria-expanded="false"
+    aria-controls="profile-content"
+    aria-label="Show more profile information"
+    type="button"
+  >
+    <span>更多</span>
+    <Icon 
+      name="material-symbols:expand-more-rounded" 
+      class="more-button-icon transition-transform duration-200 text-[1.25rem]"
+    />
+  </button>
+</div>
+
+<style>
+  .more-button-container {
+    @apply w-full;
+  }
+  
+  .more-button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .more-button:hover {
+    @apply transform;
+  }
+  
+  .more-button[aria-expanded="true"] .more-button-icon {
+    @apply rotate-180;
+  }
+  
+  .more-button:focus {
+    @apply outline-none ring-2 ring-[var(--primary)] ring-opacity-50;
+  }
+</style>
+
+<script>
+  // This script will be processed by Astro and included in the page
+  function initMoreButton() {
+    const button = document.getElementById('more-button');
+    if (!button) return;
+    
+    // Handle click events
+    button.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', (!isExpanded).toString());
+      
+      // Update aria-label based on state
+      if (!isExpanded) {
+        this.setAttribute('aria-label', 'Hide profile information');
+      } else {
+        this.setAttribute('aria-label', 'Show more profile information');
+      }
+      
+      // Dispatch custom event for other components to listen to
+      const event = new CustomEvent('moreButtonToggle', {
+        detail: { expanded: !isExpanded }
+      });
+      document.dispatchEvent(event);
+    });
+    
+    // Handle keyboard navigation
+    button.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        this.click();
+      }
+    });
+  }
+  
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMoreButton);
+  } else {
+    initMoreButton();
+  }
+  
+  // Re-initialize after page transitions (for Swup compatibility)
+  document.addEventListener('swup:contentReplaced', initMoreButton);
+</script>

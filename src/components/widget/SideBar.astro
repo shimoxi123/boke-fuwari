@@ -4,21 +4,74 @@ import Categories from "./Categories.astro";
 import Profile from "./Profile.astro";
 import Tag from "./Tags.astro";
 import Friends from "./Friends.astro";
+import MoreButton from "./MoreButton.astro";
 
 interface Props {
 	class?: string;
 	headings?: MarkdownHeading[];
+	isPostPage?: boolean;
 }
 
-const className = Astro.props.class;
+const { class: className, isPostPage = false } = Astro.props;
 ---
+<!-- 侧边栏组件，支持文章页折叠Profile卡片 -->
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
-        <Profile></Profile>
+        <Profile />
     </div>
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
-        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
-        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
-        <Friends class="onload-animation" style="animation-delay: 250ms"></Friends>
+        <Categories class="onload-animation" style="animation-delay: 150ms" />
+        <Tag class="onload-animation" style="animation-delay: 200ms" />
+        <Friends class="onload-animation" style="animation-delay: 250ms" />
     </div>
 </div>
+
+<script>
+  function initSidebarInteractions() {
+    const profileElement = document.getElementById('profile-content');
+    if (!profileElement) return;
+    
+    // Listen for MoreButton toggle events
+    document.addEventListener('moreButtonToggle', function(event: CustomEvent) {
+      const { expanded } = event.detail;
+      
+      if (expanded) {
+        // Show profile
+        profileElement.classList.remove('profile-hidden');
+        profileElement.classList.add('profile-visible');
+      } else {
+        // Hide profile
+        profileElement.classList.remove('profile-visible');
+        profileElement.classList.add('profile-hidden');
+      }
+    });
+    
+    // Handle click outside to close
+    document.addEventListener('click', function(event: MouseEvent) {
+      const target = event.target as HTMLElement;
+      if (!target) return;
+      
+      const moreButton = document.getElementById('more-button');
+      const isClickInsideProfile = profileElement.contains(target);
+      const isClickOnMoreButton = moreButton && moreButton.contains(target);
+      
+      // If click is outside both profile and more button, and profile is visible, hide it
+      if (!isClickInsideProfile && !isClickOnMoreButton) {
+        const isExpanded = moreButton && moreButton.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          moreButton.click(); // Trigger the more button to close
+        }
+      }
+    });
+  }
+  
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSidebarInteractions);
+  } else {
+    initSidebarInteractions();
+  }
+  
+  // Re-initialize after page transitions (for Swup compatibility)
+  document.addEventListener('swup:contentReplaced', initSidebarInteractions);
+</script>

@@ -3,8 +3,8 @@
 // Netlify构建检查脚本
 // 验证构建环境和依赖
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('🔍 检查Netlify构建环境...');
 

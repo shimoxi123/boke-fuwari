@@ -14,6 +14,18 @@ interface Props {
 const { id, name, isCollapsed, collapsedHeight, style } = Astro.props;
 const className = Astro.props.class;
 ---
+<!--
+  WidgetLayout 组件
+  用途：为侧边栏分类、标签等小部件提供统一的卡片布局和可折叠功能
+  Props:
+    - id: 唯一标识
+    - name: 标题
+    - isCollapsed: 是否折叠
+    - collapsedHeight: 折叠时高度
+    - class/style: 额外样式
+  用法：
+    <WidgetLayout id="tags" name="标签" isCollapsed={true} collapsedHeight="3.5rem">...</WidgetLayout>
+-->
 <widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
     <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
         before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]

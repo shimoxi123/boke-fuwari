@@ -59,3 +59,23 @@ export function setTheme(theme: LIGHT_DARK_MODE): void {
 export function getStoredTheme(): LIGHT_DARK_MODE {
 	return (localStorage.getItem("theme") as LIGHT_DARK_MODE) || DEFAULT_THEME;
 }
+
+/**
+ * 初始化主题色调和模式，页面入口调用
+ */
+export function loadTheme() {
+	const theme = getStoredTheme();
+	setTheme(theme);
+}
+
+export function loadHue() {
+	setHue(getHue());
+}
+
+/**
+ * 页面入口统一调用，初始化主题和色调
+ */
+export function initThemeAndHue() {
+	loadTheme();
+	loadHue();
+}

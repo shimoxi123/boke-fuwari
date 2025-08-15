@@ -47,8 +47,21 @@ if (isLocal) {
 const imageClass = "w-full h-full object-cover";
 const imageStyle = `object-position: ${position}`;
 ---
+<!--
+  ImageWrapper 组件
+  用途：统一处理本地与远程图片的加载、样式和懒加载，支持 Astro 图片优化
+  Props:
+    - id: 元素id
+    - src: 图片路径
+    - class: 额外样式
+    - alt: 图片描述
+    - position: object-position
+    - basePath: 本地图片基路径
+  用法：
+    <ImageWrapper src="xxx.webp" alt="描述" />
+-->
 <div id={id} class:list={[className, 'overflow-hidden relative']}>
     <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
-    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
-    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
+    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading="lazy"/>}
+    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle} loading="lazy"/>}
 </div>

@@ -10,6 +10,11 @@ import type {
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
+// 友链配置改为外部文件，便于维护
+import friends from './content/friends.json';
+import friendLinks from './content/friend-links.json';
+export { friends };
+
 export const siteConfig: SiteConfig = {
 	title: "石墨烯积木的博客",
 	subtitle: "主页",
@@ -93,26 +98,7 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 
 export const friendLinksConfig: FriendLinksConfig = {
 	enable: true,
-	links: [
-		// {
-		// 	name: "示例友链",
-		// 	url: "https://example.com",
-		// 	description: "这是一个示例友链",
-		// 	avatar: "https://via.placeholder.com/64",
-		// },
-		{
-			name: "Aliom个人博客",
-			url: "https://bailanwa.dpdns.org",
-			description: "Aliom的个人博客",
-			avatar: "https://avatars.githubusercontent.com/u/182760295?v=4",
-		},
-		{
-			name: "二叉树树",
-			url: "https://2x.nz/",
-			description: "二叉树树的个人博客",
-			avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0",
-		},
-	],
+	links: friendLinks as any,
 };
 
 export const twikooConfig: TwikooConfig = {

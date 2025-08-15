@@ -2,13 +2,13 @@
 import { Icon } from "astro-icon/components";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
-import { friendLinksConfig } from "../../config";
+import { friends } from "@/config";
 import WidgetLayout from "./WidgetLayout.astro";
 
 const COLLAPSED_HEIGHT = "12rem";
 const COLLAPSE_THRESHOLD = 4;
 
-const isCollapsed = friendLinksConfig.links.length >= COLLAPSE_THRESHOLD;
+const isCollapsed = friends.length >= COLLAPSE_THRESHOLD;
 
 interface Props {
 	class?: string;
@@ -22,22 +22,14 @@ const style = Astro.props.style;
                 class={className} style={style}
 >
     <div class="flex flex-col gap-3">
-        {friendLinksConfig.links.map((friend) => (
-            <a href={friend.url} target="_blank" rel="noopener noreferrer" 
-               class="group flex items-center gap-3 p-3 rounded-lg transition-all duration-200 
+        {friends.map(friend => (
+            <a href={friend.url} target="_blank" rel="noopener" class="group flex items-center gap-3 p-3 rounded-lg transition-all duration-200 
                       hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] active:scale-95"
                aria-label={`访问 ${friend.name} 的网站`}
             >
                 <div class="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden bg-[var(--btn-plain-bg)]">
                     {friend.avatar ? (
-                        <img src={friend.avatar} alt={`${friend.name} 的头像`} 
-                             class="w-full h-full object-cover" 
-                             loading="lazy"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                        />
-                        <div class="w-full h-full flex items-center justify-center text-[var(--primary)] hidden">
-                            <Icon name="fa6-solid:user" class="text-lg" />
-                        </div>
+                        <img src={friend.avatar} alt={friend.name + '头像'} class="w-full h-full object-cover" loading="lazy" />
                     ) : (
                         <div class="w-full h-full flex items-center justify-center text-[var(--primary)]">
                             <Icon name="fa6-solid:user" class="text-lg" />
