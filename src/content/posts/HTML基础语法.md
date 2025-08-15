@@ -1,11 +1,18 @@
 ---
 title: "HTML基础语法完全指南"
-published: 2025-08-12
+published: 2025-08-12 08:00:00
 description: "从零开始学习HTML，掌握网页开发的基础语法和最佳实践"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812161635340.webp"
 tags: ["HTML", "前端开发", "Web开发", "网页制作", "标记语言", "基础教程"]
 category: "前端开发"
 draft: false
+author:
+  name: "石墨烯积木"
+  avatar: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/6894b49f58cb8da5c80fd8e5.webp"
+  bio: "分享一些有趣的东西"
+  website: "https://www.shimoxi.qzz.io"
+  github: "shimoxi123"
+  email: "boke@shimoxi.dpdns.org"
 ---
 
 # HTML基础语法完全指南
