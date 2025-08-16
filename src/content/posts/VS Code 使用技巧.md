@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code终极效率指南：必备技巧与快捷键大全"
-published: 2025-01-05-17-28-00
+published: 2025-07-14-17-28-00
 description: "作为现代开发者的瑞士军刀，Visual Studio Code已经成为全球使用率最高的代码编辑器。本文将揭示那些能让你开发效率飙升的核心技巧与快捷键。"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003749110.webp"
 tags: ["VSCode", "代码编辑器", "开发工具", "快捷键", "效率提升", "编程技巧"]

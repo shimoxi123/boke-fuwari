@@ -20,6 +20,8 @@ async function getRawSortedPosts() {
 export async function getSortedPosts() {
 	const sorted = await getRawSortedPosts();
 
+	// prev = 上一篇 = 更旧的文章 = sorted[i + 1]
+	// next = 下一篇 = 更新的文章 = sorted[i - 1]
 	for (let i = 1; i < sorted.length; i++) {
 		sorted[i].data.nextSlug = sorted[i - 1].slug;
 		sorted[i].data.nextTitle = sorted[i - 1].data.title;
