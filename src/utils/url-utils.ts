@@ -19,6 +19,8 @@ export function getPostUrlByDate(_slug: string, publishedDate: Date): string {
 	const month = (publishedDate.getMonth() + 1).toString().padStart(2, '0');
 	const day = publishedDate.getDate().toString().padStart(2, '0');
 	const hour = publishedDate.getHours().toString().padStart(2, '0');
+	const minute = publishedDate.getMinutes().toString().padStart(2, '0');
+	const second = publishedDate.getSeconds().toString().padStart(2, '0');
 
 	return url(`/${year}/${month}/${day}/${hour}/`);
 }

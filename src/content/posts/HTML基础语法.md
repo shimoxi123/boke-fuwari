@@ -1,6 +1,6 @@
 ---
 title: "HTML基础语法完全指南"
-published: 2024-08-12T08:00:00
+published: 2025-01-10-08-00-00
 description: "从零开始学习HTML，掌握网页开发的基础语法和最佳实践"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812161635340.webp"
 tags: ["HTML", "前端开发", "Web开发", "网页制作", "标记语言", "基础教程"]

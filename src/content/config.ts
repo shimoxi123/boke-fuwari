@@ -3,8 +3,25 @@ import { defineCollection, z } from "astro:content";
 const postsCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
-		published: z.date(),
-		updated: z.date().optional(),
+		published: z.string().transform((str) => {
+			// 支持 2025-01-01-13-33-22 格式
+			const parts = str.split('-');
+			if (parts.length === 6) {
+				const [year, month, day, hour, minute, second] = parts;
+				return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), parseInt(second));
+			}
+			// 兼容其他格式
+			return new Date(str);
+		}),
+		updated: z.string().transform((str) => {
+			if (!str) return undefined;
+			const parts = str.split('-');
+			if (parts.length === 6) {
+				const [year, month, day, hour, minute, second] = parts;
+				return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), parseInt(second));
+			}
+			return new Date(str);
+		}).optional(),
 		draft: z.boolean().optional().default(false),
 		description: z.string().optional().default(""),
 		image: z.string().optional().default(""),
@@ -25,10 +42,26 @@ const postsCollection = defineCollection({
 		/* For internal use */
 		prevTitle: z.string().default(""),
 		prevSlug: z.string().default(""),
-		prevPublished: z.date().optional(),
+		prevPublished: z.string().transform((str) => {
+			if (!str) return undefined;
+			const parts = str.split('-');
+			if (parts.length === 6) {
+				const [year, month, day, hour, minute, second] = parts;
+				return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), parseInt(second));
+			}
+			return new Date(str);
+		}).optional(),
 		nextTitle: z.string().default(""),
 		nextSlug: z.string().default(""),
-		nextPublished: z.date().optional(),
+		nextPublished: z.string().transform((str) => {
+			if (!str) return undefined;
+			const parts = str.split('-');
+			if (parts.length === 6) {
+				const [year, month, day, hour, minute, second] = parts;
+				return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute), parseInt(second));
+			}
+			return new Date(str);
+		}).optional(),
 	}),
 });
 const specCollection = defineCollection({
