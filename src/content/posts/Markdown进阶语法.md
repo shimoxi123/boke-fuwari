@@ -1,6 +1,6 @@
 ---
 title: "Markdown 进阶语法指南"
-published: 2025-07-14 20:00:00
+published: 2024-07-14T20:00:00
 description: "本博客专用的Markdown进阶语法指南，包含数学公式、提示框、容器等高级功能，提升写作体验。"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003557353.webp"
 tags: ["Markdown", "进阶语法", "数学公式", "提示框", "博客写作", "高级功能"]
@@ -338,7 +338,7 @@ HTML 和 CSS 是网页开发的基础。
 ```yaml
 ---
 title: "文章标题"
-published: 2025-01-01 12:00:00
+published: 2025-01-01T12:00:00
 description: "文章描述"
 image: "封面图片URL"
 tags: ["标签1", "标签2"]

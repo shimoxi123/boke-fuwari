@@ -3,7 +3,7 @@ import { onMount } from "svelte";
 
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { getPostUrlBySlug } from "../utils/url-utils";
+import { getPostUrlByDate } from "../utils/url-utils";
 
 export let sortedPosts: Post[] = [];
 
@@ -126,7 +126,7 @@ onMount(() => {
 
                 {#each group.posts as post}
                     <a
-                            href={getPostUrlBySlug(post.slug)}
+                            href={getPostUrlByDate(post.slug, typeof post.data.published === 'string' ? new Date(post.data.published) : post.data.published)}
                             aria-label={post.data.title}
                             class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
                     >

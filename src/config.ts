@@ -11,9 +11,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 // 友链配置改为外部文件，便于维护
-import friends from './content/friends.json';
 import friendLinks from './content/friend-links.json';
-export { friends };
 
 export const siteConfig: SiteConfig = {
 	title: "石墨烯积木的博客",

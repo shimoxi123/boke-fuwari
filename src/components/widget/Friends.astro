@@ -2,13 +2,13 @@
 import { Icon } from "astro-icon/components";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
-import { friends } from "@/config";
+import { friendLinksConfig } from "@/config";
 import WidgetLayout from "./WidgetLayout.astro";
 
 const COLLAPSED_HEIGHT = "12rem";
 const COLLAPSE_THRESHOLD = 4;
 
-const isCollapsed = friends.length >= COLLAPSE_THRESHOLD;
+const isCollapsed = friendLinksConfig.links.length >= COLLAPSE_THRESHOLD;
 
 interface Props {
 	class?: string;
@@ -22,7 +22,7 @@ const style = Astro.props.style;
                 class={className} style={style}
 >
     <div class="flex flex-col gap-3">
-        {friends.map(friend => (
+        {friendLinksConfig.links.map(friend => (
             <a href={friend.url} target="_blank" rel="noopener" class="group flex items-center gap-3 p-3 rounded-lg transition-all duration-200 
                       hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] active:scale-95"
                aria-label={`访问 ${friend.name} 的网站`}
