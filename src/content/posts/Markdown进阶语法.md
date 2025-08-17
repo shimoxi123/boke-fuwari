@@ -1,6 +1,6 @@
 ---
 title: "Markdown 进阶语法指南"
-published: 2025-07-14-20-00
+published: 2025-07-14-20
 description: "本博客专用的Markdown进阶语法指南，包含数学公式、提示框、容器等高级功能，提升写作体验。"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003557353.webp"
 tags: ["Markdown", "进阶语法", "数学公式", "提示框", "博客写作", "高级功能"]

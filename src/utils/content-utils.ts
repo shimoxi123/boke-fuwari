@@ -2,42 +2,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
-
-// 解析自定义日期格式的函数
-function parseCustomDate(dateString: string): Date {
-	try {
-		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (dateString.includes("-") && dateString.split("-").length > 3) {
-			const parts = dateString.split("-");
-			if (parts.length >= 5) {
-				// 格式: YYYY-MM-DD-HH-mm
-				const year = parseInt(parts[0]);
-				const month = parseInt(parts[1]) - 1; // 月份从0开始
-				const day = parseInt(parts[2]);
-				const hour = parseInt(parts[3]);
-				const minute = parseInt(parts[4]);
-				const date = new Date(year, month, day, hour, minute);
-
-				// 检查日期是否有效
-				if (!isNaN(date.getTime())) {
-					return date;
-				}
-			}
-		}
-
-		// 尝试标准日期解析
-		const date = new Date(dateString);
-		if (!isNaN(date.getTime())) {
-			return date;
-		}
-
-		// 如果所有方法都失败，返回当前日期
-		return new Date();
-	} catch (e) {
-		// 如果出现任何错误，返回当前日期
-		return new Date();
-	}
-}
+import { parseCustomDate } from "@utils/date-utils.ts";
 
 // 获取文章并按发布日期排序
 async function getRawSortedPosts() {
@@ -49,16 +14,28 @@ async function getRawSortedPosts() {
 		let dateA: Date;
 		let dateB: Date;
 
-		// 处理文章a的日期
+		// 处理文章a的日期 (格式: YYYY-MM-DD-HH)
 		if (typeof a.data.published === "string") {
-			dateA = parseCustomDate(a.data.published);
+			const parts = a.data.published.split("-");
+			// 格式: YYYY-MM-DD-HH
+			const year = parseInt(parts[0]);
+			const month = parseInt(parts[1]) - 1; // 月份从0开始
+			const day = parseInt(parts[2]);
+			const hour = parseInt(parts[3]);
+			dateA = new Date(year, month, day, hour);
 		} else {
 			dateA = a.data.published;
 		}
 
-		// 处理文章b的日期
+		// 处理文章b的日期 (格式: YYYY-MM-DD-HH)
 		if (typeof b.data.published === "string") {
-			dateB = parseCustomDate(b.data.published);
+			const parts = b.data.published.split("-");
+			// 格式: YYYY-MM-DD-HH
+			const year = parseInt(parts[0]);
+			const month = parseInt(parts[1]) - 1; // 月份从0开始
+			const day = parseInt(parts[2]);
+			const hour = parseInt(parts[3]);
+			dateB = new Date(year, month, day, hour);
 		} else {
 			dateB = b.data.published;
 		}

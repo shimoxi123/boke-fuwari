@@ -16,32 +16,16 @@ export function getPostUrlByDate(
 	_slug: string,
 	publishedDate: Date | string,
 ): string {
-	// 处理字符串格式的日期
+	// 处理字符串格式的日期 (格式: YYYY-MM-DD-HH)
 	let dateObj: Date;
 	if (typeof publishedDate === "string") {
-		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (publishedDate.includes("-") && publishedDate.split("-").length > 3) {
-			const parts = publishedDate.split("-");
-			if (parts.length >= 5) {
-				// 格式: YYYY-MM-DD-HH-mm
-				const year = parseInt(parts[0]);
-				const month = parseInt(parts[1]) - 1; // 月份从0开始
-				const day = parseInt(parts[2]);
-				const hour = parseInt(parts[3]);
-				const minute = parseInt(parts[4]);
-				dateObj = new Date(year, month, day, hour, minute);
-			} else {
-				dateObj = new Date(publishedDate);
-			}
-		} else {
-			dateObj = new Date(publishedDate);
-		}
-
-		// 检查日期是否有效
-		if (isNaN(dateObj.getTime())) {
-			// 如果日期无效，使用当前日期作为后备
-			dateObj = new Date();
-		}
+		const parts = publishedDate.split("-");
+		// 格式: YYYY-MM-DD-HH
+		const year = parseInt(parts[0]);
+		const month = parseInt(parts[1]) - 1; // 月份从0开始
+		const day = parseInt(parts[2]);
+		const hour = parseInt(parts[3]);
+		dateObj = new Date(year, month, day, hour);
 	} else {
 		dateObj = publishedDate;
 	}

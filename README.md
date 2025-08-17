@@ -93,6 +93,10 @@ author:
 ]
 ```
 
+## 📁 项目结构
+
+项目的目录结构和详细说明请参考 [项目结构说明](./docs/project-structure.md)。
+
 ## 🛠️ 常用命令
 
 | 命令 | 说明 |
@@ -102,6 +106,9 @@ author:
 | `pnpm preview` | 预览构建结果 |
 | `pnpm new-post <name>` | 创建新文章 |
 | `pnpm format` | 格式化代码 |
+| `pnpm lint` | 代码检查和修复 |
+| `pnpm type-check` | TypeScript 类型检查 |
+| `pnpm check` | Astro 代码检查 |
 
 ## 🌐 部署
 
@@ -122,27 +129,17 @@ BAIDU_ANALYTICS_SECRET_KEY=your_secret_key
 BAIDU_ANALYTICS_SITE_ID=your_site_id
 ```
 
-## 🤝 投稿指南
+## ⚙️ 自定义配置
 
-欢迎大家投稿分享知识！
+详细的自定义配置说明请参考 [配置说明](./docs/configuration.md)。
 
-### 投稿方式
-1. Fork 本仓库
-2. 在 `src/content/posts/` 目录下创建文章
-3. 提交 Pull Request
+## 🤝 贡献指南
 
-### 投稿要求
-- ✅ 内容原创，技术准确
-- ✅ 格式规范，结构清晰
-- ✅ 包含完整的 frontmatter
-- ✅ 图片使用稳定的外链
+欢迎为项目贡献代码和内容！详细的贡献指南请参考 [贡献指南](./docs/contributing.md)。
 
-### 推荐主题
-- 编程技术教程
-- 开发工具使用
-- 项目实战经验
-- 免费资源分享
-- 学习心得体会
+### 常见问题排查
+
+开发中可能遇到的常见问题及解决方法请参考 [故障排除](./docs/troubleshooting.md)。
 
 ## 📊 网站统计
 

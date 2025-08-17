@@ -1,6 +1,6 @@
 ---
 title: "Markdown 基础语法指南"
-published: 2025-07-14-18-00
+published: 2025-07-14-18
 description: "Markdown基础语法完整指南，涵盖标题、文本格式、链接、图片、列表等通用语法，适合初学者入门。"
 image: "https://cdn.jsdelivr.net/gh/shimoxi123/img/img/20250812003557353.webp"
 tags: ["Markdown", "基础语法", "文档编写", "入门教程", "标记语言"]

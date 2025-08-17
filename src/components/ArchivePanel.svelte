@@ -4,6 +4,7 @@ import { onMount } from "svelte";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getPostUrlByDate } from "../utils/url-utils";
+import { parseCustomDate } from "../utils/date-utils";
 
 export let sortedPosts: Post[] = [];
 
@@ -28,23 +29,14 @@ function formatDate(date: Date | string) {
 	let dateObj: Date;
 
 	if (typeof date === "string") {
-		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (date.includes("-") && date.split("-").length > 3) {
-			const parts = date.split("-");
-			if (parts.length >= 5) {
-				// 格式: YYYY-MM-DD-HH-mm
-				const year = parseInt(parts[0]);
-				const month = parseInt(parts[1]) - 1; // 月份从0开始
-				const day = parseInt(parts[2]);
-				const hour = parseInt(parts[3]);
-				const minute = parseInt(parts[4]);
-				dateObj = new Date(year, month, day, hour, minute);
-			} else {
-				dateObj = new Date(date);
-			}
-		} else {
-			dateObj = new Date(date);
-		}
+		// 处理字符串格式的日期 (格式: YYYY-MM-DD-HH)
+		const parts = date.split("-");
+		// 格式: YYYY-MM-DD-HH
+		const year = parseInt(parts[0]);
+		const month = parseInt(parts[1]) - 1; // 月份从0开始
+		const day = parseInt(parts[2]);
+		const hour = parseInt(parts[3]);
+		dateObj = new Date(year, month, day, hour);
 	} else {
 		dateObj = date;
 	}
@@ -61,40 +53,6 @@ function formatDate(date: Date | string) {
 
 function formatTag(tagList: string[]) {
 	return tagList.map((t) => `#${t}`).join(" ");
-}
-
-// 解析自定义日期格式的函数
-function parseCustomDate(dateString: string): Date | null {
-	try {
-		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (dateString.includes("-") && dateString.split("-").length > 3) {
-			const parts = dateString.split("-");
-			if (parts.length >= 5) {
-				// 格式: YYYY-MM-DD-HH-mm
-				const year = parseInt(parts[0]);
-				const month = parseInt(parts[1]) - 1; // 月份从0开始
-				const day = parseInt(parts[2]);
-				const hour = parseInt(parts[3]);
-				const minute = parseInt(parts[4]);
-				const date = new Date(year, month, day, hour, minute);
-
-				// 检查日期是否有效
-				if (!isNaN(date.getTime())) {
-					return date;
-				}
-			}
-		}
-
-		// 尝试标准日期解析
-		const date = new Date(dateString);
-		if (!isNaN(date.getTime())) {
-			return date;
-		}
-
-		return null;
-	} catch (e) {
-		return null;
-	}
 }
 
 onMount(() => {
@@ -131,7 +89,14 @@ onMount(() => {
 			let dateObj: Date | null = null;
 
 			if (typeof post.data.published === "string") {
-				dateObj = parseCustomDate(post.data.published);
+				// 处理字符串格式的日期 (格式: YYYY-MM-DD-HH)
+				const parts = post.data.published.split("-");
+				// 格式: YYYY-MM-DD-HH
+				const year = parseInt(parts[0]);
+				const month = parseInt(parts[1]) - 1; // 月份从0开始
+				const day = parseInt(parts[2]);
+				const hour = parseInt(parts[3]);
+				dateObj = new Date(year, month, day, hour);
 			} else {
 				dateObj = post.data.published;
 			}
