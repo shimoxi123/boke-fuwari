@@ -25,7 +25,35 @@ interface Group {
 let groups: Group[] = [];
 
 function formatDate(date: Date | string) {
-	const dateObj = typeof date === 'string' ? new Date(date) : date;
+	let dateObj: Date;
+	
+	if (typeof date === 'string') {
+		// 处理非标准日期格式，如 "2025-08-14-18-00"
+		if (date.includes('-') && date.split('-').length > 3) {
+			const parts = date.split('-');
+			if (parts.length >= 5) {
+				// 格式: YYYY-MM-DD-HH-mm
+				const year = parseInt(parts[0]);
+				const month = parseInt(parts[1]) - 1; // 月份从0开始
+				const day = parseInt(parts[2]);
+				const hour = parseInt(parts[3]);
+				const minute = parseInt(parts[4]);
+				dateObj = new Date(year, month, day, hour, minute);
+			} else {
+				dateObj = new Date(date);
+			}
+		} else {
+			dateObj = new Date(date);
+		}
+	} else {
+		dateObj = date;
+	}
+	
+	// 检查日期是否有效
+	if (isNaN(dateObj.getTime())) {
+		return "未知日期";
+	}
+	
 	const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
 	const day = dateObj.getDate().toString().padStart(2, "0");
 	return `${month}-${day}`;
@@ -33,6 +61,40 @@ function formatDate(date: Date | string) {
 
 function formatTag(tagList: string[]) {
 	return tagList.map((t) => `#${t}`).join(" ");
+}
+
+// 解析自定义日期格式的函数
+function parseCustomDate(dateString: string): Date | null {
+	try {
+		// 处理非标准日期格式，如 "2025-08-14-18-00"
+		if (dateString.includes('-') && dateString.split('-').length > 3) {
+			const parts = dateString.split('-');
+			if (parts.length >= 5) {
+				// 格式: YYYY-MM-DD-HH-mm
+				const year = parseInt(parts[0]);
+				const month = parseInt(parts[1]) - 1; // 月份从0开始
+				const day = parseInt(parts[2]);
+				const hour = parseInt(parts[3]);
+				const minute = parseInt(parts[4]);
+				const date = new Date(year, month, day, hour, minute);
+				
+				// 检查日期是否有效
+				if (!isNaN(date.getTime())) {
+					return date;
+				}
+			}
+		}
+		
+		// 尝试标准日期解析
+		const date = new Date(dateString);
+		if (!isNaN(date.getTime())) {
+			return date;
+		}
+		
+		return null;
+	} catch (e) {
+		return null;
+	}
 }
 
 onMount(() => {
@@ -66,10 +128,16 @@ onMount(() => {
 	// 按年份分组
 	const grouped = filteredPosts.reduce(
 		(acc, post) => {
-			const dateObj = typeof post.data.published === 'string' ? new Date(post.data.published) : post.data.published;
+			let dateObj: Date | null = null;
+			
+			if (typeof post.data.published === 'string') {
+				dateObj = parseCustomDate(post.data.published);
+			} else {
+				dateObj = post.data.published;
+			}
 			
 			// 检查日期是否有效
-			if (isNaN(dateObj.getTime())) {
+			if (!dateObj || isNaN(dateObj.getTime())) {
 				return acc;
 			}
 			
@@ -126,7 +194,7 @@ onMount(() => {
 
                 {#each group.posts as post}
                     <a
-                            href={getPostUrlByDate(post.slug, typeof post.data.published === 'string' ? new Date(post.data.published) : post.data.published)}
+                            href={getPostUrlByDate(post.slug, post.data.published)}
                             aria-label={post.data.title}
                             class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
                     >

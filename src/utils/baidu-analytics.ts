@@ -14,8 +14,9 @@ const BAIDU_API_BASE_URL = 'https://openapi.baidu.com/rest/2.0/tongji';
 async function getAccessToken(): Promise<string> {
   const { apiKey, secretKey } = baiduAnalyticsConfig;
   
+  // 如果API密钥未配置，返回空字符串而不是抛出错误
   if (!apiKey || !secretKey) {
-    throw new Error('百度统计API密钥未配置');
+    return '';
   }
 
   const tokenUrl = `https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=${apiKey}&client_secret=${secretKey}`;
@@ -42,6 +43,11 @@ export async function getSiteOverview(siteId: string, startDate: string, endDate
   try {
     const accessToken = await getAccessToken();
     
+    // 如果没有访问令牌，直接返回空数据而不是抛出错误
+    if (!accessToken) {
+      return null;
+    }
+    
     const params = new URLSearchParams({
       access_token: accessToken,
       site_id: siteId,
@@ -61,7 +67,7 @@ export async function getSiteOverview(siteId: string, startDate: string, endDate
     return data.body;
   } catch (error) {
     console.error('获取网站概览数据失败:', error);
-    throw error;
+    return null; // 返回null而不是抛出错误
   }
 }
 
@@ -71,6 +77,11 @@ export async function getSiteOverview(siteId: string, startDate: string, endDate
 export async function getRealtimeData(siteId: string) {
   try {
     const accessToken = await getAccessToken();
+    
+    // 如果没有访问令牌，直接返回空数据而不是抛出错误
+    if (!accessToken) {
+      return null;
+    }
     
     const params = new URLSearchParams({
       access_token: accessToken,
@@ -88,7 +99,7 @@ export async function getRealtimeData(siteId: string) {
     return data.body;
   } catch (error) {
     console.error('获取实时访客数据失败:', error);
-    throw error;
+    return null; // 返回null而不是抛出错误
   }
 }
 
@@ -98,6 +109,11 @@ export async function getRealtimeData(siteId: string) {
 export async function getTopPages(siteId: string, startDate: string, endDate: string) {
   try {
     const accessToken = await getAccessToken();
+    
+    // 如果没有访问令牌，直接返回空数据而不是抛出错误
+    if (!accessToken) {
+      return null;
+    }
     
     const params = new URLSearchParams({
       access_token: accessToken,
@@ -118,7 +134,7 @@ export async function getTopPages(siteId: string, startDate: string, endDate: st
     return data.body;
   } catch (error) {
     console.error('获取热门页面数据失败:', error);
-    throw error;
+    return null; // 返回null而不是抛出错误
   }
 }
 
@@ -128,6 +144,11 @@ export async function getTopPages(siteId: string, startDate: string, endDate: st
 export async function getPageViews(siteId: string, pageUrl: string, startDate: string, endDate: string) {
   try {
     const accessToken = await getAccessToken();
+    
+    // 如果没有访问令牌，直接返回0而不是抛出错误
+    if (!accessToken) {
+      return 0;
+    }
     
     const params = new URLSearchParams({
       access_token: accessToken,

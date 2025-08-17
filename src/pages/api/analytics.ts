@@ -50,6 +50,22 @@ export const GET: APIRoute = async ({ url }) => {
         });
     }
 
+    // 如果数据为null，说明API密钥未配置
+    if (data === null) {
+      return new Response(JSON.stringify({
+        success: true,
+        data: null,
+        message: '百度统计API未配置，无法获取数据',
+        timestamp: new Date().toISOString()
+      }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=300', // 缓存5分钟
+        },
+      });
+    }
+
     return new Response(JSON.stringify({
       success: true,
       data: data,

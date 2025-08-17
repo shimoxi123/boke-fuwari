@@ -24,6 +24,11 @@ if (baiduAnalyticsConfig.enable && showStats && baiduAnalyticsConfig.siteId) {
     }
     const { startDate, endDate } = getLast7DaysRange();
     statsData = await getSiteOverview(baiduAnalyticsConfig.siteId, startDate, endDate);
+    
+    // 如果statsData为null，说明API密钥未配置
+    if (statsData === null) {
+      error = '百度统计API未配置';
+    }
   } catch (err) {
     error = err instanceof Error ? err.message : '获取统计数据失败';
     console.error('百度统计数据获取失败:', err);
