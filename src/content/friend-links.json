@@ -1,14 +1,14 @@
 [
-  {
-    "name": "Aliom个人博客",
-    "url": "https://bailanwa.dpdns.org",
-    "description": "Aliom的个人博客",
-    "avatar": "https://avatars.githubusercontent.com/u/182760295?v=4"
-  },
-  {
-    "name": "二叉树树",
-    "url": "https://2x.nz/",
-    "description": "二叉树树的个人博客",
-    "avatar": "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0"
-  }
+	{
+		"name": "Aliom个人博客",
+		"url": "https://bailanwa.dpdns.org",
+		"description": "Aliom的个人博客",
+		"avatar": "https://avatars.githubusercontent.com/u/182760295?v=4"
+	},
+	{
+		"name": "二叉树树",
+		"url": "https://2x.nz/",
+		"description": "二叉树树的个人博客",
+		"avatar": "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0"
+	}
 ]

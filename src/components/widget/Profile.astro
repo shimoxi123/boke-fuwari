@@ -5,17 +5,18 @@ import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 interface Props {
-  hidden?: boolean;
-  class?: string;
-  id?: string;
+	hidden?: boolean;
+	class?: string;
+	id?: string;
 }
 
 const { hidden = false, class: className = "", id } = Astro.props;
 const config = profileConfig;
 
 // Determine visibility classes based on hidden prop
-const visibilityClass = hidden ? 'profile-hidden' : 'profile-visible';
-const combinedClasses = `card-base p-3 profile-transition ${visibilityClass} ${className}`.trim();
+const visibilityClass = hidden ? "profile-hidden" : "profile-visible";
+const combinedClasses =
+	`card-base p-3 profile-transition ${visibilityClass} ${className}`.trim();
 ---
 <!--
   Profile 组件

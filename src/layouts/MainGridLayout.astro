@@ -34,7 +34,7 @@ const {
 } = Astro.props;
 
 // Detect if current page is a post page
-const isPostPage = Astro.url.pathname.startsWith('/posts/');
+const isPostPage = Astro.url.pathname.startsWith("/posts/");
 const hasBannerCredit =
 	siteConfig.banner.enable && siteConfig.banner.credit.enable;
 const hasBannerLink = !!siteConfig.banner.credit.url;

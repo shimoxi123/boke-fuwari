@@ -12,15 +12,16 @@ function joinUrl(...parts: string[]): string {
 	return joined.replace(/\/+/g, "/");
 }
 
-
-
-export function getPostUrlByDate(_slug: string, publishedDate: Date | string): string {
+export function getPostUrlByDate(
+	_slug: string,
+	publishedDate: Date | string,
+): string {
 	// 处理字符串格式的日期
 	let dateObj: Date;
-	if (typeof publishedDate === 'string') {
+	if (typeof publishedDate === "string") {
 		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (publishedDate.includes('-') && publishedDate.split('-').length > 3) {
-			const parts = publishedDate.split('-');
+		if (publishedDate.includes("-") && publishedDate.split("-").length > 3) {
+			const parts = publishedDate.split("-");
 			if (parts.length >= 5) {
 				// 格式: YYYY-MM-DD-HH-mm
 				const year = parseInt(parts[0]);
@@ -35,7 +36,7 @@ export function getPostUrlByDate(_slug: string, publishedDate: Date | string): s
 		} else {
 			dateObj = new Date(publishedDate);
 		}
-		
+
 		// 检查日期是否有效
 		if (isNaN(dateObj.getTime())) {
 			// 如果日期无效，使用当前日期作为后备
@@ -46,9 +47,9 @@ export function getPostUrlByDate(_slug: string, publishedDate: Date | string): s
 	}
 
 	const year = dateObj.getFullYear();
-	const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-	const day = dateObj.getDate().toString().padStart(2, '0');
-	const hour = dateObj.getHours().toString().padStart(2, '0');
+	const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+	const day = dateObj.getDate().toString().padStart(2, "0");
+	const hour = dateObj.getHours().toString().padStart(2, "0");
 
 	return url(`/${year}/${month}/${day}/${hour}/`);
 }

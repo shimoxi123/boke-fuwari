@@ -3,15 +3,15 @@ import { Icon } from "astro-icon/components";
 import type { AuthorConfig } from "../types/config";
 
 interface Props {
-  author?: AuthorConfig;
-  class?: string;
+	author?: AuthorConfig;
+	class?: string;
 }
 
 const { author, class: className = "" } = Astro.props;
 
 // 如果没有提供作者信息，则不显示组件
 if (!author) {
-  return null;
+	return null;
 }
 ---
 

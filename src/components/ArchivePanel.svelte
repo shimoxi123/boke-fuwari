@@ -26,11 +26,11 @@ let groups: Group[] = [];
 
 function formatDate(date: Date | string) {
 	let dateObj: Date;
-	
-	if (typeof date === 'string') {
+
+	if (typeof date === "string") {
 		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (date.includes('-') && date.split('-').length > 3) {
-			const parts = date.split('-');
+		if (date.includes("-") && date.split("-").length > 3) {
+			const parts = date.split("-");
 			if (parts.length >= 5) {
 				// 格式: YYYY-MM-DD-HH-mm
 				const year = parseInt(parts[0]);
@@ -48,12 +48,12 @@ function formatDate(date: Date | string) {
 	} else {
 		dateObj = date;
 	}
-	
+
 	// 检查日期是否有效
 	if (isNaN(dateObj.getTime())) {
 		return "未知日期";
 	}
-	
+
 	const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
 	const day = dateObj.getDate().toString().padStart(2, "0");
 	return `${month}-${day}`;
@@ -67,8 +67,8 @@ function formatTag(tagList: string[]) {
 function parseCustomDate(dateString: string): Date | null {
 	try {
 		// 处理非标准日期格式，如 "2025-08-14-18-00"
-		if (dateString.includes('-') && dateString.split('-').length > 3) {
-			const parts = dateString.split('-');
+		if (dateString.includes("-") && dateString.split("-").length > 3) {
+			const parts = dateString.split("-");
 			if (parts.length >= 5) {
 				// 格式: YYYY-MM-DD-HH-mm
 				const year = parseInt(parts[0]);
@@ -77,20 +77,20 @@ function parseCustomDate(dateString: string): Date | null {
 				const hour = parseInt(parts[3]);
 				const minute = parseInt(parts[4]);
 				const date = new Date(year, month, day, hour, minute);
-				
+
 				// 检查日期是否有效
 				if (!isNaN(date.getTime())) {
 					return date;
 				}
 			}
 		}
-		
+
 		// 尝试标准日期解析
 		const date = new Date(dateString);
 		if (!isNaN(date.getTime())) {
 			return date;
 		}
-		
+
 		return null;
 	} catch (e) {
 		return null;
@@ -103,7 +103,7 @@ onMount(() => {
 	const tags = params.has("tag") ? params.getAll("tag") : [];
 	const categories = params.has("category") ? params.getAll("category") : [];
 	const uncategorized = params.get("uncategorized");
-	
+
 	// 过滤文章
 	let filteredPosts = sortedPosts;
 
@@ -129,18 +129,18 @@ onMount(() => {
 	const grouped = filteredPosts.reduce(
 		(acc, post) => {
 			let dateObj: Date | null = null;
-			
-			if (typeof post.data.published === 'string') {
+
+			if (typeof post.data.published === "string") {
 				dateObj = parseCustomDate(post.data.published);
 			} else {
 				dateObj = post.data.published;
 			}
-			
+
 			// 检查日期是否有效
 			if (!dateObj || isNaN(dateObj.getTime())) {
 				return acc;
 			}
-			
+
 			const year = dateObj.getFullYear();
 			if (!acc[year]) {
 				acc[year] = [];

@@ -2,7 +2,30 @@
   "permissions": {
     "allow": [
       "Bash(pnpm build)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(pnpm check)",
+      "Bash(node --version)",
+      "*",
+      "Bash(*)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm install)",
+      "Bash(pnpm *)",
+      "Bash(pnpm run dev)",
+      "Bash(pnpm run lint)",
+      "Bash(pnpm run test)",
+      "Bash(pnpm run format)",
+      "Bash(pnpm run start)",
+      "Bash(pnpm run preview)",
+      "Bash(pnpm run clean)",
+      "Bash(pnpm run docs)",
+      "Bash(pnpm run deploy)",
+      "Bash(pnpm run release)",
+      "Bash(pnpm run watch)",
+      "Bash(pnpm run storybook)",
+      "Bash(pnpm run e2e)",
+      "Bash(pnpm run generate)",
+      "Bash(pnpm run build:prod)",
+      "Bash(pnpm format)"
     ],
     "deny": [],
     "ask": []
