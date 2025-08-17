@@ -4,15 +4,12 @@ import Categories from "./Categories.astro";
 import Profile from "./Profile.astro";
 import Tag from "./Tags.astro";
 import Friends from "./Friends.astro";
-import MoreButton from "./MoreButton.astro";
-
 interface Props {
 	class?: string;
 	headings?: MarkdownHeading[];
-	isPostPage?: boolean;
 }
 
-const { class: className, isPostPage = false } = Astro.props;
+const { class: className } = Astro.props;
 ---
 <!-- 侧边栏组件，支持文章页折叠Profile卡片 -->
 <div id="sidebar" class:list={[className, "w-full"]}>
@@ -32,8 +29,9 @@ const { class: className, isPostPage = false } = Astro.props;
     if (!profileElement) return;
     
     // Listen for MoreButton toggle events
-    document.addEventListener('moreButtonToggle', function(event: CustomEvent) {
-      const { expanded } = event.detail;
+    document.addEventListener('moreButtonToggle', function(event: Event) {
+      const customEvent = event as CustomEvent;
+      const { expanded } = customEvent.detail;
       
       if (expanded) {
         // Show profile

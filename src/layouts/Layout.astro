@@ -292,14 +292,7 @@ setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
 setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
 
 
-function loadTheme() {
-	const theme = getStoredTheme()
-	setTheme(theme)
-}
-
-function loadHue() {
-	setHue(getHue())
-}
+// 这些函数在 setting-utils.ts 中已经定义，这里不需要重复定义
 
 function initCustomScrollbar() {
 	const bodyElement = document.querySelector('body');
