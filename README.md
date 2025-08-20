@@ -1,5 +1,5 @@
 # 🌟 石墨烯积木的博客
-
+# 出现严重bug请勿使用
 ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
 ![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue) 
 ![Astro](https://img.shields.io/badge/Astro-5.12.9-orange)
